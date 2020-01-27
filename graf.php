@@ -3,13 +3,17 @@ require_once ("config.php");
 
 session_start();
 
-if (! isset($_POST["password"])) {
-  header("Location: login.php");
-  exit();
+if (isset($_SESSION["last_action_time"])){
+  if (time() - $_SESSION["last_action_time"] > $conf["session_timeout"]) {
+    $_SESSION["logged_in"] = false;
+    header("Location: login.php?msg=timeout");
+    exit();
+  }
 }
+$_SESSION["last_action_time"] = time();
 
-if ($_POST["password"] != $conf["password"]) {
-  header("Location: login.php?msg=wrong");
+if (!$_SESSION["logged_in"]) {
+  header("Location: login.php");
   exit();
 }
 ?>

@@ -1,3 +1,12 @@
+<?php
+session_start();
+if ($_SESSION["logged_in"]) {
+  header("Location: graf.php");
+  exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -30,7 +39,7 @@
       </header>
       <main class="mdl-layout__content">
         <div class="page-content mdl-shadow--4dp">
-          <form action="graf.php" method="POST">
+          <form action="auth.php" method="POST">
             <div class="mdl-textfield mdl-textfield--floating-label mdl-js-textfield"><input class="mdl-textfield__input" type="password" name="password" id="password"><label class="mdl-textfield__label" for="password">Contrasenya</label></div>
             <p><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" type="submit">Entrar</button></p>
           </form>
@@ -42,8 +51,13 @@
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script> 
 
     <?php
-    if (isset($_GET["msg"]) && $_GET["msg"] == "wrong") {
-      echo "<script>window.addEventListener('load', function() { var notification = document.querySelector('.mdl-js-snackbar'); notification.MaterialSnackbar.showSnackbar({ message: 'Contrasenya incorrecta' }); });</script>";
+    if (isset($_GET["msg"])) {
+      if  ($_GET["msg"] == "wrong") {
+        $msg = "Contrasenya incorrecta";
+      } elseif ($_GET["msg"] == "timeout") {
+        $msg = "Sessió expirada";
+      }
+      echo "<script>window.addEventListener('load', function() { var notification = document.querySelector('.mdl-js-snackbar'); notification.MaterialSnackbar.showSnackbar({ message: '$msg' }); });</script>";
     }
     ?>  
    </body>
