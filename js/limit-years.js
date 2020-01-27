@@ -24,7 +24,6 @@ function repaint() {
 					( numNeig == 0
 					|| (n.year == 0 && (n.sex == 'F' || n.sex == 'M') )
 					|| (!showYears.has("" + n.year) && (n.year != 0) ))) {
-				
 				n.hidden = true;
 			}
 			else {

@@ -22,9 +22,7 @@ if ($_POST["password"] != $conf["password"]) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="manifest" href="manifest.json">
-	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
     <!-- own css stylesheets -->
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/graf.css">
@@ -34,10 +32,10 @@ if ($_POST["password"] != $conf["password"]) {
     <link rel="stylesheet" href="css/year-list.css">
     <link rel="stylesheet" href="css/search-bar.css">
 
-    <!-- imported css stylesheets -->    
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- imported css stylesheets -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
-    
+
     <!-- Apple web app -->
     <link rel="apple-touch-icon" href="img/graf.png">
     <meta name="apple-mobile-web-app-title" content="Graf FME">
@@ -129,7 +127,6 @@ if ($_POST["password"] != $conf["password"]) {
           <button class="md-google-search__empty-btn" style="display: none;">
             <svg focusable="false" height="24px" viewBox="0 0 24 24" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path><path d="M0 0h24v24H0z" fill="none"></path></svg>
           </button>
-
         </div>
       </div>
     </div>

@@ -39,8 +39,7 @@ function initCamera() {
 	} else {
 		document.querySelector("#zoomin").style.display = "none";
 		document.querySelector("#zoomout").style.display = "none";
-
-    document.querySelector("#stats").style.bottom = "110px";
+        document.querySelector("#stats").style.bottom = "110px";
 		document.querySelector("#settings").style.bottom = "60px";
 		document.querySelector("#search").style.bottom = "10px";
 	}

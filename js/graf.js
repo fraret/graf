@@ -68,17 +68,26 @@ function initGraf() {
       if (graf.nodes[i].name == "Delete")   rectBorrar[3] = [ graf.nodes[i].x , graf.nodes[i].y ];
     }
 
+
+    var sizegraf = 0;
     for (var i in graf.nodes) {
       if (isInRect(graf.nodes[i].x, graf.nodes[i].y, rectBorrar)) continue;
-         
+      sizegraf++;
+    }
+    var nnode = 0;
+    for (var i in graf.nodes) {
       var ncolor = null;
+
+
       if(graf.nodes[i].sex =="F") ncolor = "#d61c08";
       else if(graf.nodes[i].sex == "M") ncolor = "#0159aa";
       else ncolor = "#0ca80a";
 
       // post-processing for year corrections
+
       var y = graf.nodes[i].year;
       if(1970 < y && y < 2004) graf.nodes[i].year += 18;
+      if (isInRect(graf.nodes[i].x, graf.nodes[i].y, rectBorrar) ) continue;
 
       s.graph.addNode({
         // we add color, originalColor, size, originalX..Y, circleX..Y atributes
@@ -94,6 +103,9 @@ function initGraf() {
         color: ncolor,
         originalColor: ncolor
       });
+
+      nnode++;
+
     }
 
     for (var i in graf.edges) {
@@ -134,7 +146,6 @@ function initGraf() {
       });
 
       s.refresh();
-      
       dialog.show(nodeId, toKeep);
     });
 
@@ -144,7 +155,6 @@ function initGraf() {
 
     s.refresh();
     autocomplete(document.querySelector("#search-input"), graf.nodes, "search", rectBorrar);
-    
     initStats();
   });
 }
@@ -180,7 +190,6 @@ function updateSigma() {
     return neighbors;
   });
 
-  
   sigma.classes.graph.addMethod("numNeighbors", function(nodeId) {
      return Object.keys(s.graph.neighbors(nodeId)).length
   });
@@ -196,5 +205,6 @@ function updateSigma() {
     });
     return vots;
   });
+
 
 }

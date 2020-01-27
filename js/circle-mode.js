@@ -6,7 +6,6 @@ function isInRect(x, y, rect) {
 
   var ans = true;
   var c = crossProd(rect[0], rect[1], x, y);
-
   for (var i = 1; i < 4; i++) {
     var temp = crossProd(rect[i], rect[(i+1)%4], x, y);
     if (c*temp < 0) ans = false;
