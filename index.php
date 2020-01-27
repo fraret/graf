@@ -8,7 +8,12 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
-
+    
+    <!--- icons -->
+    <link rel="chrome_web_icon" sizes="192x192" href="img/graf192.png">
+    <link rel="apple-touch-icon" href="img/graf180.png">
+    <link rel="shortcut icon" href="img/favicon.ico">
+    
     <style>
     .mdl-card {
       height: 320px;

@@ -28,6 +28,11 @@ if ($_SESSION["logged_in"]) {
       padding: 16px;
     }
     </style>
+    
+    <!--- icons -->
+    <link rel="chrome_web_icon" sizes="192x192" href="img/graf192.png">
+    <link rel="apple-touch-icon" href="img/graf180.png">
+    <link rel="shortcut icon" href="img/favicon.ico">
   </head>
   <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">

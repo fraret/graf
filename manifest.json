@@ -3,9 +3,14 @@
   "name": "El graf alternatiu de la FME",
   "icons": [
     {
-      "src": "img/graf.png",
+      "src": "img/graf192.png",
       "type": "image/png",
       "sizes": "192x192"
+    },
+    {
+      "src": "img/graf512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ],
   "background_color": "#060606",

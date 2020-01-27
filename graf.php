@@ -41,10 +41,14 @@ if (!$_SESSION["logged_in"]) {
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
 
     <!-- Apple web app -->
-    <link rel="apple-touch-icon" href="img/graf.png">
     <meta name="apple-mobile-web-app-title" content="Graf FME">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <!--- icons -->
+    <link rel="chrome_web_icon" sizes="192x192" href="img/graf192.png">
+    <link rel="apple-touch-icon" href="img/graf180.png">
+    <link rel="shortcut icon" href="img/favicon.ico">
   </head>
   <body>
     <!-- side buttons -->
