@@ -1,0 +1,3 @@
+[frontend]
+apiurl = wikipedia.org ;obiously not valid, use a valid apiurl
+password = 1234 ;do not use this, please
