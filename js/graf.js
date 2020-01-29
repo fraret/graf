@@ -4,7 +4,10 @@
 // graf is the JSON graph
 var s, graf;
 
-// query dario JSON for the graph information
+// query JSON for the graph information
+
+//[fraret] 2020-01-29: Why is this function so complicated? Why support both
+// GET and POST . Has this been copy-pasted? 
 function xhr(method, url, params, callback) {
   var http = new XMLHttpRequest();
   if (method == "POST") {
@@ -59,19 +62,9 @@ function initGraf() {
     // graf is the JSON data
     graf = JSON.parse(responseText);
 
-    // does graf.nodes have a size attribute?
-    var rectBorrar = [[0,0], [0,0], [0,0], [0,0]];
-    for (var i in graf.nodes) {
-      if (graf.nodes[i].name == "Erase")    rectBorrar[0] = [ graf.nodes[i].x , graf.nodes[i].y ];
-      if (graf.nodes[i].name == "Borrar")   rectBorrar[1] = [ graf.nodes[i].x , graf.nodes[i].y ];
-      if (graf.nodes[i].name == "Esborrar") rectBorrar[2] = [ graf.nodes[i].x , graf.nodes[i].y ];
-      if (graf.nodes[i].name == "Delete")   rectBorrar[3] = [ graf.nodes[i].x , graf.nodes[i].y ];
-    }
-
 
     var sizegraf = 0;
     for (var i in graf.nodes) {
-      if (isInRect(graf.nodes[i].x, graf.nodes[i].y, rectBorrar)) continue;
       sizegraf++;
     }
     var nnode = 0;
@@ -87,7 +80,6 @@ function initGraf() {
 
       var y = graf.nodes[i].year;
       if(1970 < y && y < 2004) graf.nodes[i].year += 18;
-      if (isInRect(graf.nodes[i].x, graf.nodes[i].y, rectBorrar) ) continue;
 
       s.graph.addNode({
         // we add color, originalColor, size, originalX..Y, circleX..Y atributes
@@ -109,8 +101,6 @@ function initGraf() {
     }
 
     for (var i in graf.edges) {
-      if (isInRect(graf.nodes[graf.edges[i].a].x, graf.nodes[graf.edges[i].a].y, rectBorrar)) continue;
-      if (isInRect(graf.nodes[graf.edges[i].b].x, graf.nodes[graf.edges[i].b].y, rectBorrar)) continue;
 
       s.graph.addEdge({
         id: i,
@@ -154,7 +144,7 @@ function initGraf() {
     initSearchBar();
 
     s.refresh();
-    autocomplete(document.querySelector("#search-input"), graf.nodes, "search", rectBorrar);
+    autocomplete(document.querySelector("#search-input"), graf.nodes, "search");
     initStats();
   });
 }
