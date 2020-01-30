@@ -80,8 +80,23 @@ if (!$_SESSION["logged_in"]) {
         <ul>
           <li><b>Any:</b> <span data-fill="year"></span></li>
           <li><b>Sexe:</b> <span data-fill="sex"></span></li>
-          <li><b>ID:</b> <span data-fill="id"></span></li>
+          <li><b>ID:</b> <span data-fill="id" id="node-id"></span></li>
+          
+          
         </ul>
+        
+        <div id="addedge-box">
+			<button id="addedge-button" class="addedge-button">Afegir una nova aresta +</button>
+			<div id="addedge-msg" class="addegde-msg"><h2>Aresta afegida!</h2></div>
+			<input id="addedge-input" type="text" style="display:none;">
+		</div>	
+        
+        <div id="edge-list">
+			<h3>Arestes (<span data-fill="n-edges"></span>):</h3>
+			<ul data-fill="edges">
+			</ul>
+		</div>
+		
         <h3>Arestes (<span data-fill="n-edges"></span>):</h3>
         <ul data-fill="edges">
         </ul>
@@ -95,6 +110,7 @@ if (!$_SESSION["logged_in"]) {
         <h2 data-fill="name"></h2>
         <p><span data-fill="year"></span>, <span data-fill="sex"></span>, <span data-fill="id"></span></p>
       </div>
+      
     </div>
 
     <!-- Stats dialog container -->

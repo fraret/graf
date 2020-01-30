@@ -55,8 +55,41 @@ function autocomplete(inp, obj, act) {
             cameraGoto(node.x, node.y);
             break;
             case "addEdge":
-            // @TODO: Add an edge between A and B
-            alert(obj[n].name);
+            // Add an edge between A and B
+            var sourceID = document.getElementById("node-id").innerText.substr(1);
+            var edgeName = Math.min(sourceID, n) + "_" + Math.max(sourceID, n);
+            if (!graf.edges[edgeName]) {
+                var a = Math.min(sourceID, n);
+                var b = Math.max(sourceID, n);
+              
+              // Temporary fix, just for testing
+              s.graph.addEdge({
+                id: edgeName,
+                source: a,
+                target: b,
+                size: 0.5
+              });
+              
+              s.graph.addEdge({
+                id: edgeName,
+                source: graf.edges[i].a,
+                target: graf.edges[i].b,
+                size: Math.min(4, Math.max((7/(2*Math.pow(20, 2)))*Math.pow(1, 2) + 1/2, 0.5)),
+                vots: 1,
+            });
+              
+
+            } else {
+              alert("Edge already exists");
+            }
+                    
+            // Empty the input bar
+            var addEdgeInput = document.getElementById('addedge-input');
+            addEdgeInput.value = "";
+            
+            // Return to default view
+            document.querySelector("#addedge-input").style.display = "none";  
+            document.querySelector("#edge-list").style.display = "block";
             break;
           }
 
@@ -149,3 +182,23 @@ function autocomplete(inp, obj, act) {
     clearLists();
   });
 }
+
+function addedEdgeMSG(edgeMSG) {
+  var opacity = 8;
+  edgeMSG.style.display = "block";
+  
+  var opacityChange = window.setInterval(function() {
+	  edgeMSG.style.color = "rgba(0,0,0, "+ opacity/10 +")";
+	  var edgeList = document.querySelector("#edge-list ul");
+	  edgeList.style.backgroundColor = "rgba(0,200,0, "+ opacity/10 +")";
+	  --opacity;
+	  console.log(opacity);
+	}, 100);
+	
+  var backToDef = window.setTimeout(function() {
+	  edgeMSG.style.display = "none";
+	  edgeMSG.style.color = "black";
+	  window.clearInterval(opacityChange);
+	}, 1000);
+}
+
