@@ -59,24 +59,21 @@ function autocomplete(inp, obj, act) {
             var sourceID = document.getElementById("node-id").innerText.substr(1);
             var edgeName = Math.min(sourceID, n) + "_" + Math.max(sourceID, n);
             if (!graf.edges[edgeName]) {
-                var a = Math.min(sourceID, n);
-                var b = Math.max(sourceID, n);
-              
+              var a = Math.min(sourceID, n);
+              var b = Math.max(sourceID, n);
+              graf.edges[edgeName] = {
+                votes: 1,
+                a: a,
+                b: b,
+              };
               // Temporary fix, just for testing
               s.graph.addEdge({
                 id: edgeName,
                 source: a,
                 target: b,
-                size: 0.5
+                size: 0.5,
+                vots: 1
               });
-              
-              s.graph.addEdge({
-                id: edgeName,
-                source: graf.edges[i].a,
-                target: graf.edges[i].b,
-                size: Math.min(4, Math.max((7/(2*Math.pow(20, 2)))*Math.pow(1, 2) + 1/2, 0.5)),
-                vots: 1,
-            });
               
 
             } else {

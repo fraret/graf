@@ -1,5 +1,11 @@
 // *********** HERE STARTS dialog.js *************
 
+function display_edge(x,y) {
+  var a = Math.min(x, y);
+  var b = Math.max(x, y);
+  var edgeName = String(a) + "_" + String(b);
+}
+
 var dialog = {
   fill: function(data, text, html=false) {
     var el = document.querySelectorAll("*[data-fill=\""+data+"\"]");

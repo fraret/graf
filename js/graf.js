@@ -4,10 +4,8 @@
 // graf is the JSON graph
 var s, graf;
 
-// query JSON for the graph information
-
-//[fraret] 2020-01-29: Why is this function so complicated? Why support both
-// GET and POST . Has this been copy-pasted? 
+// Function to query an online resource
+// Later used to GET the JSON for the graph
 function xhr(method, url, params, callback) {
   var http = new XMLHttpRequest();
   if (method == "POST") {
@@ -118,7 +116,7 @@ function initGraf() {
       toKeep = s.graph.neighbors(nodeId);
       // toKeep[nodeId] = e.data.node;
 
-
+    //(de)Color nodes
       s.graph.nodes().forEach(function(n) {
         if (toKeep[n.id] || n.id == nodeId) {
           n.color = n.originalColor;
@@ -127,6 +125,7 @@ function initGraf() {
         }
       });
 
+    //(de)Color edges
       s.graph.edges().forEach(function(e) {
         if ((e.source == nodeId || e.target == nodeId) && (toKeep[e.source] || toKeep[e.target])) {
           e.color = '#fff';

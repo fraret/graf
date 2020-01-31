@@ -97,9 +97,6 @@ if (!$_SESSION["logged_in"]) {
 			</ul>
 		</div>
 		
-        <h3>Arestes (<span data-fill="n-edges"></span>):</h3>
-        <ul data-fill="edges">
-        </ul>
       </div>
       <div id="dialog-edge" style="display: none;"></div>
     </div>
