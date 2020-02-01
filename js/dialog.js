@@ -66,6 +66,7 @@ var dialog = {
   addEdge: function() { 
     document.querySelector("#edge-list").style.display = "none";
     setModeAddEdge();
+    dialog.close();
     lastNode = document.getElementById("node-id").innerText.substr(1);
     // Focus on the addEdge input bar
    document.querySelector("#search-input").focus();

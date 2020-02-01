@@ -1,4 +1,12 @@
 /* ********** HERE STARTS option-buttons.css ****** */
+#cancel {
+    position: absolute;
+	right: 10px;
+	bottom: 210px;
+	z-index: 100;
+    display: none;
+}
+
 #stats {
 	position: absolute;
 	right: 10px;

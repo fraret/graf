@@ -160,17 +160,26 @@ function initGraf() {
   });
   
   mode = Modes.SEARCH;
+  document.querySelector("#cancel").addEventListener("click", function() {
+      setModeSearch();
+  });
 }
 
 function setModeAddEdge(){
+  document.querySelector("#edge-list").style.display = "none";
   document.getElementById("search-input").placeholder = "Afegeix aresta";
-  document.getElementById("search-bar").className = "md-google-search-edit"
+  document.getElementById("search-bar").className = "md-google-search-edit";
+  document.getElementById("stats").style.display= "none";
+  document.getElementById("cancel").style.display= "block";
   mode = Modes.ADD_EDGE;
 }
 
 function setModeSearch(){
+  document.querySelector("#edge-list").style.display = "block";
   document.getElementById("search-input").placeholder = "Cerca";
-  document.getElementById("search-bar").className = "md-google-search"
+  document.getElementById("search-bar").className = "md-google-search";
+  document.getElementById("stats").style.display= "block";
+  document.getElementById("cancel").style.display= "none";
   mode = Modes.SEARCH;
 }
 

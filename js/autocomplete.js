@@ -172,19 +172,29 @@ function addEdge(x, y) {
     if (!graf.edges[edgeName]) {
       var a = Math.min(x, y);
       var b = Math.max(x, y);
-      graf.edges[edgeName] = {
-        votes: 1,
-        a: a,
-        b: b,
-      };
-      s.graph.addEdge({
-        id: edgeName,
-        source: a,
-        target: b,
-        size: 0.5,
-        vots: 1
+      xhr("POST", "ns/inserter.php", "action=add_edge&a="+String(a)+"&b="+String(b), function(responseText, status) {
+        var ans = JSON.parse(responseText);
+        console.log(responseText);
+        if (parseInt(ans[0]) == 0) {
+          graf.edges[edgeName] = {
+            votes: 1,
+            a: a,
+            b: b,
+          };
+          s.graph.addEdge({
+            id: edgeName,
+            source: a,
+            target: b,
+            size: 0.5,
+            vots: 1
+          });
+          s.refresh();
+          var not = document.querySelector('.mdl-js-snackbar');
+          not.MaterialSnackbar.showSnackbar({ message: 'Aresta afegida!' });
+        } else {
+          alert(ans[2]);
+        }
       });
-      
       
     } else {
       alert("L'aresta ja existeix");
@@ -196,7 +206,6 @@ function addEdge(x, y) {
   document.querySelector(".md-google-search__empty-btn").style.display = "none";
   
   // Return to default view
-  document.querySelector("#edge-list").style.display = "block";
   dialog.close();
   setModeSearch();
   

@@ -38,7 +38,7 @@ if (!$_SESSION["logged_in"]) {
 
     <!-- imported css stylesheets -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-green.min.css" /> 
 
     <!-- Apple web app -->
     <meta name="apple-mobile-web-app-title" content="Graf FME">
@@ -53,11 +53,12 @@ if (!$_SESSION["logged_in"]) {
   <body>
     <!-- side buttons -->
     <div id="option-buttons">
-      <button id="stats" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">assignment</i></button>
-      <button id="settings" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">settings</i></button>
-      <button id="search" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">search</i></button>
-      <button id="zoomin" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">zoom_in</i></button>
-      <button id="zoomout" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">zoom_out</i></button>
+      <button id="cancel" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">close</i></button>
+      <button id="stats" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">assignment</i></button>
+      <button id="settings" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">settings</i></button>
+      <button id="search" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">search</i></button>
+      <button id="zoomin" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">zoom_in</i></button>
+      <button id="zoomout" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">zoom_out</i></button>
     </div>
 
     <!-- limit year list -->
@@ -94,7 +95,7 @@ if (!$_SESSION["logged_in"]) {
         </div>
         
         <div id="addedge-box">
-          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--primary">Afegir una nova aresta +</button>
+          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">add</i> Aresta</button>
         </div>
     
       </div>
@@ -155,7 +156,9 @@ if (!$_SESSION["logged_in"]) {
     <div class="autocomplete-container" style="display: none;">
       <div id="autocomplete-list" class="autocomplete-items"></div>
     </div>
-
+    
+    <div class="mdl-snackbar mdl-js-snackbar"><div class="mdl-snackbar__text"></div><button type="button" class="mdl-snackbar__action"></button></div>
+    
     <div id="graf"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.0/sigma.min.js"></script>
@@ -175,8 +178,7 @@ if (!$_SESSION["logged_in"]) {
     <script src="js/init.js"></script>
 
     <!-- imported scripts -->
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script> 
     <!--<script src="js/service-worker.js"></script>-->
   </body>
 </html>
