@@ -87,7 +87,6 @@ if (!$_SESSION["logged_in"]) {
         
         <div id="addedge-box">
 			<button id="addedge-button" class="addedge-button">Afegir una nova aresta +</button>
-			<div id="addedge-msg" class="addegde-msg"><h2>Aresta afegida!</h2></div>
 			<input id="addedge-input" type="text" style="display:none;">
 		</div>	
         
@@ -162,9 +161,10 @@ if (!$_SESSION["logged_in"]) {
 
 
     <!-- Our scripts -->
-    <script src="js/autocomplete.js"></script>
+    
     <script src="js/circle-mode.js"></script>
     <script src="js/graf.js"></script>
+    <script src="js/autocomplete.js"></script>
     <script src="js/limit-years.js"></script>
     <script src="js/search-bar.js"></script>
     <script src="js/dialog.js"></script>

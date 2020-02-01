@@ -1,10 +1,5 @@
 // *********** HERE STARTS dialog.js *************
 
-function display_edge(x,y) {
-  var a = Math.min(x, y);
-  var b = Math.max(x, y);
-  var edgeName = String(a) + "_" + String(b);
-}
 
 var dialog = {
   fill: function(data, text, html=false) {
@@ -69,12 +64,11 @@ var dialog = {
     document.querySelector("#dialog").style.display = "none";
     document.querySelector("#summary-dialog").style.display = "block";
   },
-  addEdge: function() {
-    document.querySelector("#addedge-input").style.display = "block";  
+  addEdge: function() { 
     document.querySelector("#edge-list").style.display = "none";
-    autocomplete(document.getElementById("addedge-input"), graf.nodes, "addEdge");
+    autocomplete(document.querySelector("#search-input"), graf.nodes, "addEdge");
     // Focus on the addEdge input bar
-    document.getElementById("addedge-input").focus();
+   document.querySelector("#search-input").focus();
   }
 };
 

@@ -85,8 +85,11 @@ function autocomplete(inp, obj, act) {
             addEdgeInput.value = "";
             
             // Return to default view
-            document.querySelector("#addedge-input").style.display = "none";  
             document.querySelector("#edge-list").style.display = "block";
+            s.refresh();
+            dialog.close();
+            colornode(sourceID);
+            dialog.show(sourceID,s.graph.neighbors(sourceID));
             break;
           }
 
@@ -179,6 +182,7 @@ function autocomplete(inp, obj, act) {
     clearLists();
   });
 }
+
 
 function addedEdgeMSG(edgeMSG) {
   var opacity = 8;

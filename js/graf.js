@@ -31,6 +31,28 @@ function xhr(method, url, params, callback) {
   }
 }
 
+function colornode(nodeId) {
+    
+    toKeep = s.graph.neighbors(nodeId);
+    //(de)Color nodes
+    s.graph.nodes().forEach(function(n) {
+        if (toKeep[n.id] || n.id == nodeId) {
+          n.color = n.originalColor;
+        } else {
+          n.color = '#333';
+        }
+      });
+
+    //(de)Color edges
+      s.graph.edges().forEach(function(e) {
+        if ((e.source == nodeId || e.target == nodeId) && (toKeep[e.source] || toKeep[e.target])) {
+          e.color = '#fff';
+        } else {
+          e.color = '#333';
+        }
+      });
+    
+}
 
 function initGraf() {
   // create new methods for sigma library
@@ -112,27 +134,9 @@ function initGraf() {
     
     s.bind('clickNode', function(e) {
       statsDialog.close();
-      var nodeId = e.data.node.id,
-      toKeep = s.graph.neighbors(nodeId);
-      // toKeep[nodeId] = e.data.node;
-
-    //(de)Color nodes
-      s.graph.nodes().forEach(function(n) {
-        if (toKeep[n.id] || n.id == nodeId) {
-          n.color = n.originalColor;
-        } else {
-          n.color = '#333';
-        }
-      });
-
-    //(de)Color edges
-      s.graph.edges().forEach(function(e) {
-        if ((e.source == nodeId || e.target == nodeId) && (toKeep[e.source] || toKeep[e.target])) {
-          e.color = '#fff';
-        } else {
-          e.color = '#333';
-        }
-      });
+      var nodeId = e.data.node.id;
+      
+      colornode(nodeId);
 
       s.refresh();
       dialog.show(nodeId, toKeep);
