@@ -163,30 +163,32 @@ function autocomplete(inp, obj) {
   });
 }
 
-function addEdge(x, y) { //TODO: use a global variable to avoid this hack
-  
-  var sourceID = x;
-  var n = y;
-  var edgeName = Math.min(sourceID, n) + "_" + Math.max(sourceID, n);
-  if (!graf.edges[edgeName]) {
-    var a = Math.min(sourceID, n);
-    var b = Math.max(sourceID, n);
-    graf.edges[edgeName] = {
-      votes: 1,
-      a: a,
-      b: b,
-    };
-    s.graph.addEdge({
-      id: edgeName,
-      source: a,
-      target: b,
-      size: 0.5,
-      vots: 1
-    });
-    
+function addEdge(x, y) {
+  if (parseInt(x) == parseInt(y)) {
+    alert("No es pot fer una aresta d'un node a ell mateix");
     
   } else {
-    alert("Edge already exists");
+    var edgeName = Math.min(x, y) + "_" + Math.max(x, y);
+    if (!graf.edges[edgeName]) {
+      var a = Math.min(x, y);
+      var b = Math.max(x, y);
+      graf.edges[edgeName] = {
+        votes: 1,
+        a: a,
+        b: b,
+      };
+      s.graph.addEdge({
+        id: edgeName,
+        source: a,
+        target: b,
+        size: 0.5,
+        vots: 1
+      });
+      
+      
+    } else {
+      alert("L'aresta ja existeix");
+    }
   }
   
   // Empty the input bar

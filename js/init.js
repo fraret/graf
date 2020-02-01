@@ -3,7 +3,6 @@
 function init() {
   initGraf();
   addYearList();
-  initJustDoIt();
 }
 
 window.addEventListener("load", init);

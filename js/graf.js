@@ -137,18 +137,16 @@ function initGraf() {
         case Modes.SEARCH:
         statsDialog.close();
         var nodeId = e.data.node.id;
-        var toKeep = s.graph.neighbors(nodeId);
         colorNode(nodeId);
         s.refresh();
-        dialog.show(nodeId, toKeep);
+        dialog.show(nodeId);
         break;
         case Modes.ADD_EDGE:
         var nodeId = e.data.node.id;
-        var toKeep = s.graph.neighbors(nodeId);
         addEdge(lastNode, nodeId);
         colorNode(nodeId);
         s.refresh();
-        dialog.show(nodeId, toKeep);
+        dialog.show(nodeId);
       }
     });
 
@@ -165,11 +163,15 @@ function initGraf() {
 }
 
 function setModeAddEdge(){
-    mode = Modes.ADD_EDGE;
+  document.getElementById("search-input").placeholder = "Afegeix aresta";
+  document.getElementById("search-bar").className = "md-google-search-edit"
+  mode = Modes.ADD_EDGE;
 }
 
 function setModeSearch(){
-    mode = Modes.SEARCH;
+  document.getElementById("search-input").placeholder = "Cerca";
+  document.getElementById("search-bar").className = "md-google-search"
+  mode = Modes.SEARCH;
 }
 
 function updateSigma() {

@@ -12,8 +12,8 @@ var dialog = {
       }
     }
   },
-  show: function(id, neighbors) {
-    var neighbors = Object.values(neighbors);
+  show: function(id) {
+    var neighbors = Object.values(s.graph.neighbors(id));
     this.fill("name", graf.nodes[id].name);
     this.fill("year", graf.nodes[id].year);
     this.fill("sex", graf.nodes[id].sex);
