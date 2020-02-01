@@ -14,7 +14,6 @@ var dialog = {
   },
   show: function(id, neighbors) {
     var neighbors = Object.values(neighbors);
-
     this.fill("name", graf.nodes[id].name);
     this.fill("year", graf.nodes[id].year);
     this.fill("sex", graf.nodes[id].sex);
@@ -66,7 +65,8 @@ var dialog = {
   },
   addEdge: function() { 
     document.querySelector("#edge-list").style.display = "none";
-    autocomplete(document.querySelector("#search-input"), graf.nodes, "addEdge");
+    setModeAddEdge();
+    lastNode = document.getElementById("node-id").innerText.substr(1);
     // Focus on the addEdge input bar
    document.querySelector("#search-input").focus();
   }

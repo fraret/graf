@@ -4,7 +4,7 @@
 // graf is the JSON graph
 var s, graf;
 
-// Function to query an online resource
+// Function to query an online resource (AJAX)
 // Later used to GET the JSON for the graph
 function xhr(method, url, params, callback) {
   var http = new XMLHttpRequest();
@@ -31,7 +31,7 @@ function xhr(method, url, params, callback) {
   }
 }
 
-function colornode(nodeId) {
+function colorNode(nodeId) {
     
     toKeep = s.graph.neighbors(nodeId);
     //(de)Color nodes
@@ -133,13 +133,23 @@ function initGraf() {
     }
     
     s.bind('clickNode', function(e) {
-      statsDialog.close();
-      var nodeId = e.data.node.id;
-      
-      colornode(nodeId);
-
-      s.refresh();
-      dialog.show(nodeId, toKeep);
+      switch (mode) {
+        case Modes.SEARCH:
+        statsDialog.close();
+        var nodeId = e.data.node.id;
+        var toKeep = s.graph.neighbors(nodeId);
+        colorNode(nodeId);
+        s.refresh();
+        dialog.show(nodeId, toKeep);
+        break;
+        case Modes.ADD_EDGE:
+        var nodeId = e.data.node.id;
+        var toKeep = s.graph.neighbors(nodeId);
+        addEdge(lastNode, nodeId);
+        colorNode(nodeId);
+        s.refresh();
+        dialog.show(nodeId, toKeep);
+      }
     });
 
     initDialog();
@@ -147,11 +157,20 @@ function initGraf() {
     initSearchBar();
 
     s.refresh();
-    autocomplete(document.querySelector("#search-input"), graf.nodes, "search");
+    autocomplete(document.querySelector("#search-input"), graf.nodes);
     initStats();
   });
+  
+  mode = Modes.SEARCH;
 }
 
+function setModeAddEdge(){
+    mode = Modes.ADD_EDGE;
+}
+
+function setModeSearch(){
+    mode = Modes.SEARCH;
+}
 
 function updateSigma() {
   // returns set of neighouts

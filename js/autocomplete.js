@@ -1,6 +1,15 @@
 // *********** HERE STARTS autocomplete.js *************
 
-function autocomplete(inp, obj, act) {
+const Modes = Object.freeze({
+  "SEARCH" : 0, 
+  "ADD_EDGE" : 1
+});
+
+var mode = Modes.search;
+
+var lastNode = 0;
+
+function autocomplete(inp, obj) {
   /*the autocomplete function takes two arguments,
   the text field element and an objay of possible autocompleted values:*/
   var currentFocus;
@@ -49,47 +58,18 @@ function autocomplete(inp, obj, act) {
           });
 
 
-          switch (act) {
-            case "search":
+          switch (mode) {
+            case Modes.SEARCH:
             // Move camera to desired node
             cameraGoto(node.x, node.y);
             break;
-            case "addEdge":
+            case Modes.ADD_EDGE:
             // Add an edge between A and B
-            var sourceID = document.getElementById("node-id").innerText.substr(1);
-            var edgeName = Math.min(sourceID, n) + "_" + Math.max(sourceID, n);
-            if (!graf.edges[edgeName]) {
-              var a = Math.min(sourceID, n);
-              var b = Math.max(sourceID, n);
-              graf.edges[edgeName] = {
-                votes: 1,
-                a: a,
-                b: b,
-              };
-              // Temporary fix, just for testing
-              s.graph.addEdge({
-                id: edgeName,
-                source: a,
-                target: b,
-                size: 0.5,
-                vots: 1
-              });
-              
-
-            } else {
-              alert("Edge already exists");
-            }
-                    
-            // Empty the input bar
-            var addEdgeInput = document.getElementById('addedge-input');
-            addEdgeInput.value = "";
-            
-            // Return to default view
-            document.querySelector("#edge-list").style.display = "block";
-            s.refresh();
-            dialog.close();
-            colornode(sourceID);
+            var sourceID = lastNode;
+            addEdge(sourceID, n);
+            colorNode(sourceID);
             dialog.show(sourceID,s.graph.neighbors(sourceID));
+            s.refresh();
             break;
           }
 
@@ -183,6 +163,45 @@ function autocomplete(inp, obj, act) {
   });
 }
 
+function addEdge(x, y) { //TODO: use a global variable to avoid this hack
+  
+  var sourceID = x;
+  var n = y;
+  var edgeName = Math.min(sourceID, n) + "_" + Math.max(sourceID, n);
+  if (!graf.edges[edgeName]) {
+    var a = Math.min(sourceID, n);
+    var b = Math.max(sourceID, n);
+    graf.edges[edgeName] = {
+      votes: 1,
+      a: a,
+      b: b,
+    };
+    s.graph.addEdge({
+      id: edgeName,
+      source: a,
+      target: b,
+      size: 0.5,
+      vots: 1
+    });
+    
+    
+  } else {
+    alert("Edge already exists");
+  }
+  
+  // Empty the input bar
+  document.querySelector("#search-input").value = "";
+  document.querySelector(".md-google-search__empty-btn").style.display = "none";
+  
+  // Return to default view
+  document.querySelector("#edge-list").style.display = "block";
+  dialog.close();
+  setModeSearch();
+  
+}
+  
+  
+  
 
 function addedEdgeMSG(edgeMSG) {
   var opacity = 8;
