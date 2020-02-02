@@ -136,6 +136,7 @@ function initGraf() {
       switch (mode) {
         case Modes.SEARCH:
         statsDialog.close();
+        console.log(e);
         var nodeId = e.data.node.id;
         colorNode(nodeId);
         s.refresh();

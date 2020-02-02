@@ -175,7 +175,7 @@ function addEdge(x, y) {
       xhr("POST", "ns/inserter.php", "action=add_edge&a="+String(a)+"&b="+String(b), function(responseText, status) {
         var ans = JSON.parse(responseText);
         console.log(responseText);
-        if (parseInt(ans[0]) == 0) {
+        if (parseInt(ans.status) == 0) {
           graf.edges[edgeName] = {
             votes: 1,
             a: a,
@@ -192,7 +192,7 @@ function addEdge(x, y) {
           var not = document.querySelector('.mdl-js-snackbar');
           not.MaterialSnackbar.showSnackbar({ message: 'Aresta afegida!' });
         } else {
-          alert(ans[2]);
+          alert(ans.msg);
         }
       });
       
@@ -210,26 +210,3 @@ function addEdge(x, y) {
   setModeSearch();
   
 }
-  
-  
-  
-
-function addedEdgeMSG(edgeMSG) {
-  var opacity = 8;
-  edgeMSG.style.display = "block";
-  
-  var opacityChange = window.setInterval(function() {
-	  edgeMSG.style.color = "rgba(0,0,0, "+ opacity/10 +")";
-	  var edgeList = document.querySelector("#edge-list ul");
-	  edgeList.style.backgroundColor = "rgba(0,200,0, "+ opacity/10 +")";
-	  --opacity;
-	  console.log(opacity);
-	}, 100);
-	
-  var backToDef = window.setTimeout(function() {
-	  edgeMSG.style.display = "none";
-	  edgeMSG.style.color = "black";
-	  window.clearInterval(opacityChange);
-	}, 1000);
-}
-

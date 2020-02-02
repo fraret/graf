@@ -119,8 +119,8 @@ if (!$_SESSION["logged_in"]) {
     </div>
     
     <!-- Edit dialog -->
-    <div id="edit-dialog" class="mdl-shadow--2dp" style="display: block;">
-      <h2> Edita </h2>
+    <div id="edit-dialog" class="mdl-shadow--2dp" style="display: none;">
+      <h2 id="edit-title" data-fill="edit-title"> Edita </h2>
       <div id="name-field" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 300px;">
         <input class="mdl-textfield__input" type="text" pattern="^[^;<>]{3,240}$" id="input-name">
         <label class="mdl-textfield__label" for="input-name">Nom</label>
@@ -128,7 +128,7 @@ if (!$_SESSION["logged_in"]) {
       </div>
       <br>
       <div id = "year-div" class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-        <select class="mdl-selectfield__select" id="year" name="year">
+        <select class="mdl-selectfield__select" id="input-year" name="input-year">
           <?php
             $max_year = (int) date("Y");
             if (((int) date("m")) < 9) {
@@ -139,26 +139,26 @@ if (!$_SESSION["logged_in"]) {
             }
           ?>
         </select>
-        <label class="mdl-selectfield__label" for="year">Any</label>
+        <label class="mdl-selectfield__label" for="year" style="color: #007bff;">Any</label>
       </div>
       
       <div id = "sex-div" class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
-        <select class="mdl-selectfield__select" id="sex" name="sex">
+        <select class="mdl-selectfield__select" id="input-sex" name="input-sex">
           <option value="U">U</option>
           <option value="F">F</option>
           <option value="M">M</option>
         </select>
-        <label class="mdl-selectfield__label" for="sex">Sexe</label>
+        <label class="mdl-selectfield__label" for="input-sex" style="color: #007bff;">Sexe</label>
       </div>
       
       <div id="addnode-cancel">
           <div class="mdl-layout-spacer"></div>
-          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--primary"><i class="material-icons" style="color: rgb(108, 117, 125);">close</i></button>
+          <button id="canceledit-button" class="mdl-button mdl-js-button mdl-button--primary"><i class="material-icons" style="color: rgb(108, 117, 125);">close</i></button>
       </div>
       
       <div id="addnode-save">
           <div class="mdl-layout-spacer"></div>
-          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">save</i></button>
+          <button id="saveedit-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">save</i></button>
       </div>
       
     </div>
