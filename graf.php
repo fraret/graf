@@ -26,7 +26,7 @@ if (!$_SESSION["logged_in"]) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="manifest" href="manifest.json">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- own css stylesheets -->
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/graf.css">
@@ -39,6 +39,7 @@ if (!$_SESSION["logged_in"]) {
     <!-- imported css stylesheets -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-green.min.css" /> 
+    <link rel="stylesheet" href="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.css" />
 
     <!-- Apple web app -->
     <meta name="apple-mobile-web-app-title" content="Graf FME">
@@ -49,6 +50,7 @@ if (!$_SESSION["logged_in"]) {
     <link rel="chrome_web_icon" sizes="192x192" href="img/graf192.png">
     <link rel="apple-touch-icon" href="img/graf180.png">
     <link rel="shortcut icon" href="img/favicon.ico">
+    
   </head>
   <body>
     <!-- side buttons -->
@@ -77,16 +79,21 @@ if (!$_SESSION["logged_in"]) {
       <button id="min-dialog" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"><i class="material-icons">remove</i></button>
 
       <div id="dialog-vertex">
-        <h2 data-fill="name"></h2>
+        <h2 id="name-text" data-fill="name"></h2>
+        
         <ul>
-          <li><b>Any:</b> <span data-fill="year"></span></li>
-          <li><b>Sexe:</b> <span data-fill="sex"></span></li>
+          <li id="year-text"><b>Any:</b> <span data-fill="year"></span></li>
+          <li id="sex-text"><b>Sexe:</b> <span data-fill="sex"></span></li>
+          
+          
           <li><b>ID:</b> <span data-fill="id" id="node-id"></span></li>
           
           
         </ul>
         
-        
+        <div id="editnode-box">
+          <button id="editnode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">edit</i></button>
+        </div>
         
         <div id="edge-list">
           <h3>Arestes (<span data-fill="n-edges"></span>):</h3>
@@ -107,6 +114,51 @@ if (!$_SESSION["logged_in"]) {
       <div id="summary-vertex">
         <h2 data-fill="name"></h2>
         <p><span data-fill="year"></span>, <span data-fill="sex"></span>, <span data-fill="id"></span></p>
+      </div>
+      
+    </div>
+    
+    <!-- Edit dialog -->
+    <div id="edit-dialog" class="mdl-shadow--2dp" style="display: block;">
+      <h2> Edita </h2>
+      <div id="name-field" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 300px;">
+        <input class="mdl-textfield__input" type="text" pattern="^[^;<>]{3,240}$" id="input-name">
+        <label class="mdl-textfield__label" for="input-name">Nom</label>
+        <span class="mdl-textfield__error">Nom no vàlid (3-240 caràcters, excepte ; &lt &gt)</span>
+      </div>
+      <br>
+      <div id = "year-div" class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+        <select class="mdl-selectfield__select" id="year" name="year">
+          <?php
+            $max_year = (int) date("Y");
+            if (((int) date("m")) < 9) {
+                --$max_year;
+            }
+            for ($i = $max_year; $i >= 2007; --$i) {
+              echo '<option value="'.$i.'">'.$i.'</option>';
+            }
+          ?>
+        </select>
+        <label class="mdl-selectfield__label" for="year">Any</label>
+      </div>
+      
+      <div id = "sex-div" class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+        <select class="mdl-selectfield__select" id="sex" name="sex">
+          <option value="U">U</option>
+          <option value="F">F</option>
+          <option value="M">M</option>
+        </select>
+        <label class="mdl-selectfield__label" for="sex">Sexe</label>
+      </div>
+      
+      <div id="addnode-cancel">
+          <div class="mdl-layout-spacer"></div>
+          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--primary"><i class="material-icons" style="color: rgb(108, 117, 125);">close</i></button>
+      </div>
+      
+      <div id="addnode-save">
+          <div class="mdl-layout-spacer"></div>
+          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">save</i></button>
       </div>
       
     </div>
@@ -179,6 +231,7 @@ if (!$_SESSION["logged_in"]) {
 
     <!-- imported scripts -->
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script> 
+    <script src="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.js"></script>
     <!--<script src="js/service-worker.js"></script>-->
   </body>
 </html>
