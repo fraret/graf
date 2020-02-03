@@ -7,6 +7,8 @@ const EditModes = Object.freeze({
 
 var editMode = EditModes.EDIT;
 
+var moveUpdater = null;
+
 var dialog = {
   fill: function(data, text, html=false) {
     var el = document.querySelectorAll("*[data-fill=\""+data+"\"]");
@@ -104,9 +106,15 @@ var editDialog = {
     editDialog.fill("edit-title","Edita");
     document.querySelector("#edit-dialog").style.display = "block";
     editMode = EditModes.EDIT;
-    lastNode = document.getElementById("node-id").innerText.substr(1);
+  },
+  openAdd: function() {
+    dialog.close();
+    editDialog.fill("edit-title","Afegeix");
+    document.querySelector("#edit-dialog").style.display = "block";
+    editMode = EditModes.ADD;
   },
   save: function() {
+    document.getElementById("edit-dialog").style.cursor = "wait";
     if(editMode == EditModes.EDIT) {
       var id = lastNode;
       var name = document.getElementById("input-name").value;
@@ -117,14 +125,18 @@ var editDialog = {
         var ans = JSON.parse(responseText);
         console.log(responseText);
         if (parseInt(ans.status) == 0) {
-          graf.nodes[id] = {
-            name: name,
-            year: year,
-            sex: sex,
-          };
+          var ncolor = null;
+          if(sex =="F") ncolor = "#d61c08";
+          else if(sex == "M") ncolor = "#0159aa";
+          else ncolor = "#0ca80a";
+          graf.nodes[id].name = name;
+          graf.nodes[id].year = year;
+          graf.nodes[id].sex = sex;
           s.graph.nodes(id).label = name;
           s.graph.nodes(id).year = year;
           s.graph.nodes(id).sex = sex;
+          s.graph.nodes(id).color = ncolor;
+          s.graph.nodes(id).originalColor = ncolor;
           s.refresh();
           var not = document.querySelector('.mdl-js-snackbar');
           not.MaterialSnackbar.showSnackbar({ message: 'Node modificat!' });
@@ -136,8 +148,124 @@ var editDialog = {
       
       editDialog.close();
     } else {
+      var name = document.getElementById("input-name").value;
+      var year = document.getElementById("input-year").value;
+      var sex = document.getElementById("input-sex").value;
+      var x = Math.round(s.camera.x);
+      var y = Math.round(s.camera.y);
+      xhr("POST", "ns/inserter.php", "action=add_node&id="+String(id)+"&name="+name+"&year="+String(year)+"&sex="+sex+"&x="+String(x)+"&y="+String(y), function(responseText, status) {
+        var ans = JSON.parse(responseText);
+        console.log(responseText);
+        if (parseInt(ans.status) == 0) {
+          var id = ans.par.id
+          
+          
+          
+          var ncolor = null;
+          if(sex =="F") ncolor = "#d61c08";
+          else if(sex == "M") ncolor = "#0159aa";
+          else ncolor = "#0ca80a";
+          graf.nodes[id] = {
+            id: id,
+            name: name,
+            year: year,
+            sex: sex,
+            x: x,
+            y: y
+          };
+          
+          s.graph.addNode({
+            // we add color, originalColor, size, originalX..Y, circleX..Y atributes
+            id: id,
+            year: year,
+            sex: sex,
+            label: name,
+            x: x,
+            y: y,
+            originalX: x,
+            originalY: y,
+            size: 10,
+            color: ncolor,
+            originalColor: ncolor
+          });
+            
+          s.refresh();
+          var not = document.querySelector('.mdl-js-snackbar');
+          not.MaterialSnackbar.showSnackbar({ message: 'Node afegit!' });
+        } else {
+          alert(ans.msg);
+        }
+        editDialog.close();
+      });
     }
+    document.getElementById("edit-dialog").style.cursor = "default";
   }
+}
+
+function updateMove() {
+  var x = Math.round(s.camera.x);
+  var y = Math.round(s.camera.y);
+  
+  s.graph.nodes(lastNode)["x"] = x;
+  s.graph.nodes(lastNode)["originalX"] = x;
+  s.graph.nodes(lastNode)["read_cam0:x"] = x;
+  
+  s.graph.nodes(lastNode)["y"] = y;
+  s.graph.nodes(lastNode)["originalY"] = y;
+  s.graph.nodes(lastNode)["read_cam0:y"] = y;
+  
+  s.refresh();
+}
+
+function startMove() {
+  dialog.close();
+  editDialog.close();
+  lastNode = document.getElementById("node-id").innerText.substr(1);
+  var id = lastNode;
+  moveUpdater = setInterval(updateMove, 500);
+}
+
+function endMove2() {
+  var x = Math.round(s.camera.x);
+  var y = Math.round(s.camera.y);
+  
+  updateMove();
+  
+  var id = lastNode;
+  
+  xhr("POST", "ns/inserter.php", "action=move_node&id="+String(id)+"&x="+String(x)+"&y="+String(y), function(responseText, status) {
+        var ans = JSON.parse(responseText);
+        console.log(responseText);
+        if (parseInt(ans.status) == 0) {
+          graf.nodes[id].x = x;
+          graf.nodes[id].y = y;
+          var not = document.querySelector('.mdl-js-snackbar');
+          not.MaterialSnackbar.showSnackbar({ message: 'Node desplaçat!' });
+        } else {
+          alert(ans.msg);
+          
+          x = graf.nodes[id].x;
+          y = graf.nodes[id].y;
+          s.graph.nodes(lastNode)["x"] = x;
+          s.graph.nodes(lastNode)["originalX"] = x;
+          s.graph.nodes(lastNode)["read_cam0:x"] = x;
+          
+          s.graph.nodes(lastNode)["y"] = y;
+          s.graph.nodes(lastNode)["originalY"] = y;
+          s.graph.nodes(lastNode)["read_cam0:y"] = y;
+          
+          s.refresh();
+          
+        }
+      });
+  
+  
+}
+
+function endMove() {
+  clearInterval(moveUpdater);
+  setTimeout(endMove2, 500);
+  
 }
 
 function initDialog() {
@@ -149,5 +277,6 @@ function initDialog() {
   document.querySelector("#editnode-button").addEventListener("click",editDialog.openEdit);
   document.querySelector("#canceledit-button").addEventListener("click",editDialog.close);
   document.querySelector("#saveedit-button").addEventListener("click",editDialog.save);
+  document.querySelector("#movenode-button").addEventListener("click",startMove);
 }
 

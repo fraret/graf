@@ -91,8 +91,13 @@ if (!$_SESSION["logged_in"]) {
           
         </ul>
         
+        
         <div id="editnode-box">
           <button id="editnode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">edit</i></button>
+        </div>
+        <br>
+        <div id="movenode-box">
+          <button id="movenode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">open_with</i></button>
         </div>
         
         <div id="edge-list">
@@ -153,7 +158,7 @@ if (!$_SESSION["logged_in"]) {
       
       <div id="addnode-cancel">
           <div class="mdl-layout-spacer"></div>
-          <button id="canceledit-button" class="mdl-button mdl-js-button mdl-button--primary"><i class="material-icons" style="color: rgb(108, 117, 125);">close</i></button>
+          <button id="canceledit-button" class="mdl-button mdl-js-button mdl-button--primary"><i class="material-icons" style="color: rgb(108, 117, 125);">cancel</i></button>
       </div>
       
       <div id="addnode-save">
