@@ -51,23 +51,8 @@ function repaint() {
 	}
 }
 
-function altYearList() {
-	var yearlist = document.querySelector("#year-list");
-
-	if(yearlist.style.display == "none"){
-		yearlist.style.display = "block";
-		document.querySelector("#settings i").innerText = "close";
-		yearLimits = true;
-	}
-	else{
-		yearlist.style.display = "none";
-		document.querySelector("#settings i").innerText = "settings";
-		yearLimits = true;
-	}
-}
-
 function first_day(year) {
-	start_course = new Date(year + '-09-12');
+	start_course = new Date(year + '-09-01');
 	return start_course;
 }
 
@@ -76,40 +61,88 @@ function addYearList() {
 	var year = 2007;
 	var today = new Date();
 	while (first_day(year) < today) {
-		var lab = document.createElement("label");
-		lab.setAttribute("class", "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect custom-checkbox");
-		lab.setAttribute("for", "checkbox-"+year);
-		var yin = document.createElement("input");
-		yin.type = "checkbox";
-		yin.setAttribute("class", "mdl-checkbox__input");
-		yin.name = year;
-		yin.id = "checkbox-"+year;
-		yin.addEventListener("change", function() {
-			limitYears = true;
+    
+    var ck = document.getElementById("checkbox-" + String(year));
+    
+    if (ck != null) {
+      ck.addEventListener("change", function() {
+        limitYears = true;
 
-			if(this.checked) {
-				showYears.add(this.name);
-			} else {
-				showYears.delete(this.name);
-			}
+        if(this.checked) {
+          showYears.add(this.name);
+        } else {
+          showYears.delete(this.name);
+        }
 
-			if (showYears.size == 0) limitYears = false;
+        if (showYears.size == 0) limitYears = false;
 
-			repaint();
+        repaint();
 
-			s.refresh();
-		});
+        s.refresh();
+      });
+    } else {
+      console.log("Year" + String(year) + "checkbox is null");
+    }
 
-		var span = document.createElement("span");
-		span.innerText = year;
-		span.setAttribute("class", "mdl-checkbox__label");
-
-		lab.appendChild(yin);
-		lab.appendChild(span);
-		ylistspan.appendChild(lab);
-		ylistspan.insertAdjacentHTML("beforeend", "<br>");
 		++year;
 	}
 
-	document.querySelector("#settings").addEventListener("click", altYearList);
+}
+
+function deactivateTab(btn) {
+  if ( document.getElementById(btn).classList.contains('active') )
+    document.getElementById(btn).classList.toggle('active');
+}
+
+function activateTab(btn) {
+   document.getElementById(btn).classList.add("active");
+}
+
+var configDialog = {
+  show: function() {
+    if (window.innerWidth > 700) {
+      document.querySelector("#config-dialog").style.display = "block";
+      document.querySelector("#backdrop-container").style.display = "block";
+
+    } else {
+      document.querySelector("#config-dialog").style.margin = "10px";
+      document.querySelector("#config-dialog").style.width = "Calc(100% - 20px)";
+      document.querySelector("#config-dialog").style.height = "Calc(100% - 10px)";
+      document.querySelector("#config-dialog").style.display = "block";     
+    }
+  },
+  
+  close: function() {
+    document.querySelector("#config-dialog").style.display = "none";
+    document.querySelector("#backdrop-container").style.display = "none";
+
+  },
+  
+  changeEdit: function() {
+    document.querySelector("#year-selection").style.display = "none";
+    document.querySelector("#edit-options").style.display = "block";
+    deactivateTab("years-tab");
+    activateTab("edit-tab");
+  },
+  
+  changeYears: function() {
+    document.querySelector("#year-selection").style.display = "block";
+    document.querySelector("#edit-options").style.display = "none";
+    deactivateTab("edit-tab");
+    activateTab("years-tab");
+    
+  }
+};
+
+function initConfig() {
+  document.querySelector("#settings").addEventListener("click", function() {
+    if (document.querySelector("#config-dialog").style.display == "none") 
+      configDialog.show();
+    else configDialog.close();
+  });
+  
+  document.querySelector("#config-quit-dialog").addEventListener("click", configDialog.close);
+  
+  document.querySelector("#edit-tab-btn").addEventListener("click", configDialog.changeEdit);
+  document.querySelector("#years-tab-btn").addEventListener("click", configDialog.changeYears);
 }

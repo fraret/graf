@@ -147,7 +147,7 @@ function diameter() {
     }
   }
   
-  console.log(memo[dict[606]][dict[2]]);
+  //console.log(memo[dict[606]][dict[2]]);
   var mx = 0;
   for (var i=0; i<n; i++) {
     for (var j=0; j<n; j++) {
@@ -158,11 +158,11 @@ function diameter() {
   for (var i=0; i<n; i++) {
     for (var j=i+1; j<n; j++) {
       if (mx == memo[i][j]) {
-
+        /*
         s.graph.nodes().forEach(function(n){
           if(n.id == Object.keys(dict)[i]) console.log(n);
           if(n.id == Object.keys(dict)[j]) console.log(n);
-        });
+        });*/
       }
     }
   }
@@ -179,9 +179,9 @@ function initStats() {
   });
   
   document.querySelector("#stats-quit-dialog").addEventListener("click", statsDialog.close);
-
+  
   console.log("nodes: " + numNodes());
   console.log("edges: " + numEdges());
-  console.log("diameter: " + diameter());
+  //console.log("diameter: " + diameter());
 }
 

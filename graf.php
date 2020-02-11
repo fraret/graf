@@ -32,6 +32,7 @@ if (!$_SESSION["logged_in"]) {
     <link rel="stylesheet" href="css/graf.css">
     <link rel="stylesheet" href="css/dialog.css">
     <link rel="stylesheet" href="css/stats-dialog.css">
+    <link rel="stylesheet" href="css/config-dialog.css">
     <link rel="stylesheet" href="css/option-buttons.css">
     <link rel="stylesheet" href="css/year-list.css">
     <link rel="stylesheet" href="css/search-bar.css">
@@ -39,7 +40,7 @@ if (!$_SESSION["logged_in"]) {
     <!-- imported css stylesheets -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue-green.min.css" /> 
-    <link rel="stylesheet" href="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.css" />
+    <link rel="stylesheet" href="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.css" /> <!-- mdl dropdown. Should find an alternative/way not to rely on a cdn that sets cookies -->
 
     <!-- Apple web app -->
     <meta name="apple-mobile-web-app-title" content="Graf FME">
@@ -61,11 +62,6 @@ if (!$_SESSION["logged_in"]) {
       <button id="search" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">search</i></button>
       <button id="zoomin" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">zoom_in</i></button>
       <button id="zoomout" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">zoom_out</i></button>
-    </div>
-
-    <!-- limit year list -->
-    <div id="year-list" style="display:none">
-      <span id="year-list-span"></span>
     </div>
 
     <!-- Search container -->
@@ -94,12 +90,14 @@ if (!$_SESSION["logged_in"]) {
         
         <div id="editnode-box">
           <button id="editnode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">edit</i></button>
-        </div>
-        <br>
-        <div id="movenode-box">
           <button id="movenode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">open_with</i></button>
         </div>
-        
+        <br>
+        <!--
+        <div id="movenode-box">
+          
+        </div>
+        -->
         <div id="edge-list">
           <h3>Arestes (<span data-fill="n-edges"></span>):</h3>
           <ul data-fill="edges">
@@ -113,6 +111,8 @@ if (!$_SESSION["logged_in"]) {
       </div>
       <div id="dialog-edge" style="display: none;"></div>
     </div>
+    
+    
     <div id="summary-dialog" class="mdl-shadow--2dp" style="display: none;">
       <button id="quit2-dialog" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"><i class="material-icons">close</i></button>
       <button id="max-dialog" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"><i class="material-icons">add</i></button>
@@ -171,20 +171,20 @@ if (!$_SESSION["logged_in"]) {
     <!-- Stats dialog container -->
     <div id="stats-dialog" class="mdl-shadow--2dp" style="display: none;">
       <button id="stats-quit-dialog" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"><i class="material-icons">close</i></button>
-	  
-	  <div class="btn-group btn-group-toggle" data-toggle="buttons"
-	  		style="margin-top: 50px; margin-left:0%; width:100%">
-	    <label class="btn btn-secondary active" style="border-radius:0px;display:block;width:100%">
-		  <input type="radio" name="options" id="option1" autocomplete="off" checked> Ranking
-		</label>
-		<label class="btn btn-secondary" style="border-radius:0px;display:block;width:100%">
-		  <input type="radio" name="options" id="option2" autocomplete="off"> Stats
-		</label>
-		<label class="btn btn-secondary" style="border-radius:0px;display:block;width:100%">
-		  <input type="radio" name="options" id="option2" autocomplete="off"> Distance
-		</label>
+      
+      <div class="btn-group btn-group-toggle" data-toggle="buttons"
+            style="margin-top: 50px; margin-left:0%; width:100%">
+        <label class="btn btn-secondary active" style="border-radius:0px;display:block;width:100%">
+          <input type="radio" name="options" id="option1" autocomplete="off" checked> Ranking
+        </label>
+        <label class="btn btn-secondary" style="border-radius:0px;display:block;width:100%">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Stats
+        </label>
+        <label class="btn btn-secondary" style="border-radius:0px;display:block;width:100%">
+          <input type="radio" name="options" id="option2" autocomplete="off"> Distance
+        </label>
 
-	  </div>
+      </div>
       
       <div id="stats-dialog-section">
    
@@ -192,6 +192,59 @@ if (!$_SESSION["logged_in"]) {
         </ul>
       </div>
     </div>
+    
+    <div id="config-dialog" class="mdl-shadow--2dp" style="display: none;">
+      <button id="config-quit-dialog" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"><i class="material-icons">close</i></button>
+      
+      <div class="btn-group btn-group-toggle" data-toggle="buttons"
+            style="margin-top: 50px; margin-left:0%; width:100%">
+            
+        <label id="years-tab" class="btn btn-secondary active" style="border-radius:0px;display:block;width:100%">
+          <input type="radio" name="options" id="years-tab-btn" autocomplete="off" checked> Anys
+        </label>
+        
+        <label class="btn btn-secondary" style="border-radius:0px;display:block;width:100%">
+          <input type="radio" name="options" id="option2" autocomplete="off"> TBD
+        </label>
+        
+        <label id="edit-tab" class="btn btn-secondary" style="border-radius:0px;display:block;width:100%">
+          <input type="radio" name="options" id="edit-tab-btn" autocomplete="off"> Edit
+        </label>
+
+      </div>
+      
+      <div id="year-selection">
+   
+        <?php
+          $max_year = (int) date("Y");
+          if (((int) date("m")) < 9) {
+            --$max_year;
+          }
+          for ($year = 2007; $year <= $max_year; ++$year) {
+
+            echo
+            '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect custom-checkbox" for="checkbox-' .$year. '">
+
+            <input type="checkbox" class="mdl-checkbox__input" name="' .$year. '" id="checkbox-'.$year.'">
+
+            <span class="mdl-checkbox__label">' .$year. ' </span>
+
+            </label>
+            <br>';
+          }
+        ?>
+      </div>
+      
+      <div id="edit-options" style="display: none;">
+        
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="edit-toggle">
+            <input type="checkbox" id="edit-toggle" class="mdl-switch__input">
+            <span class="mdl-switch__label"> Mode d'edició </span>
+          </label>
+        
+      </div>
+    </div>
+    
 
     <!-- MD Search Box -->
     <div class="md-google-search__metacontainer" style="display: none;">
@@ -236,7 +289,7 @@ if (!$_SESSION["logged_in"]) {
 
     <!-- imported scripts -->
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script> 
-    <script src="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.js"></script>
-    <!--<script src="js/service-worker.js"></script>-->
+    <script src="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.js"></script> <!-- mdl dropdown. Should find an alternative/way not to rely on a cdn that sets cookies -->
+    <!-- <script src="js/service-worker.js"></script> -->
   </body>
 </html>
