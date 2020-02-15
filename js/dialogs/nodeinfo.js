@@ -273,10 +273,5 @@ function initDialog() {
   document.querySelector("#quit2-dialog").addEventListener("click", dialog.close);
   document.querySelector("#max-dialog").addEventListener("click", dialog.max);
   document.querySelector("#min-dialog").addEventListener("click", dialog.min);
-  document.querySelector("#addedge-button").addEventListener("click", dialog.addEdge);
-  document.querySelector("#editnode-button").addEventListener("click",editDialog.openEdit);
-  document.querySelector("#canceledit-button").addEventListener("click",editDialog.close);
-  document.querySelector("#saveedit-button").addEventListener("click",editDialog.save);
-  document.querySelector("#movenode-button").addEventListener("click",startMove);
 }
 

@@ -1,9 +1,17 @@
 // *********** HERE STARTS init.js *************
 
-function init() {
+function init_pre() {
   initGraf();
   addYearList();
   initConfig();
 }
 
-window.addEventListener("load", init);
+function init_post() {
+  initDialog();
+  initEditDialog();
+  initCamera();
+  initSearchBar();
+  initStats();
+}
+
+window.addEventListener("load", init_pre);

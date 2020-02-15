@@ -54,6 +54,86 @@ function colorNode(nodeId) {
     
 }
 
+
+function xhr_getgraf(responseText, status) {
+  // graf is the JSON data
+  graf = JSON.parse(responseText);
+
+
+  var sizegraf = 0;
+  for (var i in graf.nodes) {
+    sizegraf++;
+  }
+  var nnode = 0;
+  for (var i in graf.nodes) {
+    var ncolor = null;
+
+
+    if(graf.nodes[i].sex =="F") ncolor = "#d61c08";
+    else if(graf.nodes[i].sex == "M") ncolor = "#0159aa";
+    else ncolor = "#0ca80a";
+
+    // post-processing for year corrections
+
+    var y = graf.nodes[i].year;
+    if(1970 < y && y < 2004) graf.nodes[i].year += 18;
+
+    s.graph.addNode({
+      // we add color, originalColor, size, originalX..Y, circleX..Y atributes
+      id: graf.nodes[i].id,
+      year: graf.nodes[i].year,
+      sex: graf.nodes[i].sex,
+      label: graf.nodes[i].name,
+      x: graf.nodes[i].x,
+      y: graf.nodes[i].y,
+      originalX: graf.nodes[i].x,
+      originalY: graf.nodes[i].y,
+      size: 10,
+      color: ncolor,
+      originalColor: ncolor
+    });
+
+    nnode++;
+
+  }
+
+  for (var i in graf.edges) {
+
+    s.graph.addEdge({
+      id: i,
+      source: graf.edges[i].a,
+      target: graf.edges[i].b,
+      size: Math.min(4, Math.max((7/(2*Math.pow(20, 2)))*Math.pow(graf.edges[i].votes, 2) + 1/2, 0.5)),
+      vots: graf.edges[i].votes,
+    });
+
+  }
+  
+  s.bind('clickNode', function(e) {
+    switch (mode) {
+      case Modes.SEARCH:
+      statsDialog.close();
+      console.log(e);
+      var nodeId = e.data.node.id;
+      colorNode(nodeId);
+      s.refresh();
+      dialog.show(nodeId);
+      break;
+      case Modes.ADD_EDGE:
+      var nodeId = e.data.node.id;
+      addEdge(lastNode, nodeId);
+      colorNode(nodeId);
+      s.refresh();
+      dialog.show(nodeId);
+    }
+  });
+  
+  init_post();
+  
+  s.refresh();
+  autocomplete(document.querySelector("#search-input"), graf.nodes);
+}
+
 function initGraf() {
   // create new methods for sigma library
   updateSigma();
@@ -78,87 +158,7 @@ function initGraf() {
 
 
   // query for JSON for graph data
-  xhr("GET", "api.php", "action=getgraf", function(responseText, status) {
-    // graf is the JSON data
-    graf = JSON.parse(responseText);
-
-
-    var sizegraf = 0;
-    for (var i in graf.nodes) {
-      sizegraf++;
-    }
-    var nnode = 0;
-    for (var i in graf.nodes) {
-      var ncolor = null;
-
-
-      if(graf.nodes[i].sex =="F") ncolor = "#d61c08";
-      else if(graf.nodes[i].sex == "M") ncolor = "#0159aa";
-      else ncolor = "#0ca80a";
-
-      // post-processing for year corrections
-
-      var y = graf.nodes[i].year;
-      if(1970 < y && y < 2004) graf.nodes[i].year += 18;
-
-      s.graph.addNode({
-        // we add color, originalColor, size, originalX..Y, circleX..Y atributes
-        id: graf.nodes[i].id,
-        year: graf.nodes[i].year,
-        sex: graf.nodes[i].sex,
-        label: graf.nodes[i].name,
-        x: graf.nodes[i].x,
-        y: graf.nodes[i].y,
-        originalX: graf.nodes[i].x,
-        originalY: graf.nodes[i].y,
-        size: 10,
-        color: ncolor,
-        originalColor: ncolor
-      });
-
-      nnode++;
-
-    }
-
-    for (var i in graf.edges) {
-
-      s.graph.addEdge({
-        id: i,
-        source: graf.edges[i].a,
-        target: graf.edges[i].b,
-        size: Math.min(4, Math.max((7/(2*Math.pow(20, 2)))*Math.pow(graf.edges[i].votes, 2) + 1/2, 0.5)),
-        vots: graf.edges[i].votes,
-      });
-
-    }
-    
-    s.bind('clickNode', function(e) {
-      switch (mode) {
-        case Modes.SEARCH:
-        statsDialog.close();
-        console.log(e);
-        var nodeId = e.data.node.id;
-        colorNode(nodeId);
-        s.refresh();
-        dialog.show(nodeId);
-        break;
-        case Modes.ADD_EDGE:
-        var nodeId = e.data.node.id;
-        addEdge(lastNode, nodeId);
-        colorNode(nodeId);
-        s.refresh();
-        dialog.show(nodeId);
-      }
-    });
-
-    initDialog();
-    initCamera();
-    initSearchBar();
-
-    s.refresh();
-    autocomplete(document.querySelector("#search-input"), graf.nodes);
-    initStats();
-  });
+  xhr("GET", "api.php", "action=getgraf", xhr_getgraf);
   
   mode = Modes.SEARCH;
   document.querySelector("#cancel").addEventListener("click", function() {

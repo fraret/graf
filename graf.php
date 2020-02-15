@@ -91,6 +91,7 @@ if (!$_SESSION["logged_in"]) {
         <div id="editnode-box">
           <button id="editnode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">edit</i></button>
           <button id="movenode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">open_with</i></button>
+          <button id="removenode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color--red"><i class="material-icons">delete</i></button>
         </div>
         <br>
         <!--
@@ -276,16 +277,30 @@ if (!$_SESSION["logged_in"]) {
 
     <!-- Our scripts -->
     
+    <!-- edit scripts -->
+    <script src="js/edit/addnode.js"></script>
+    <script src="js/edit/editnode.js"></script>
+    <script src="js/edit/deletenode.js"></script>
+    <script src="js/edit/movenode.js"></script>
+    <script src="js/edit/addedge.js"></script>
+    <script src="js/edit/deleteedge.js"></script>
+    
+    <!-- dialogs-->
+    <script src="js/dialogs/nodeinfo.js"></script>
+    <script src="js/dialogs/nodeedit.js"></script>
+    
+    
     <script src="js/circle-mode.js"></script>
     <script src="js/graf.js"></script>
     <script src="js/autocomplete.js"></script>
     <script src="js/limit-years.js"></script>
     <script src="js/search-bar.js"></script>
-    <script src="js/dialog.js"></script>
     <script src="js/camera.js"></script>
     <script src="js/just-do-it.js"></script>
     <script src="js/statistics.js"></script>
-    <script src="js/init.js"></script>
+    
+    <!-- Last one!! -->
+    <script src="js/init.js"></script>  
 
     <!-- imported scripts -->
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script> 
