@@ -3,9 +3,7 @@ session_start();
 
 require_once ("config.php");
 
-$_SESSION["last_action_time"] = time();
-
-if ($_SESSION["logged_in"]) {
+if (isset($_SESSION["logged_in"]) and $_SESSION["logged_in"]) {
   if (time() - $_SESSION["last_action_time"] > $conf["session_timeout"]) {
     $_SESSION["logged_in"] = false;
     header("Location: login.php?msg=timeout");

@@ -12,7 +12,7 @@ if (isset($_SESSION["last_action_time"])){
 }
 $_SESSION["last_action_time"] = time();
 
-if (!$_SESSION["logged_in"]) {
+if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
   header("Location: login.php");
   exit();
 }
@@ -56,7 +56,9 @@ if (!$_SESSION["logged_in"]) {
   <body>
     <!-- side buttons -->
     <div id="option-buttons">
+      <button id="accept" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">check</i></button>
       <button id="cancel" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">close</i></button>
+      <button id="add" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--accent"><i class="material-icons">add</i></button>
       <button id="stats" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">assignment</i></button>
       <button id="settings" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">settings</i></button>
       <button id="search" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--primary"><i class="material-icons">search</i></button>
@@ -91,7 +93,7 @@ if (!$_SESSION["logged_in"]) {
         <div id="editnode-box">
           <button id="editnode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">edit</i></button>
           <button id="movenode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">open_with</i></button>
-          <button id="removenode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color--red"><i class="material-icons">delete</i></button>
+          <button id="deletenode-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color--red"><i class="material-icons">delete</i></button>
         </div>
         <br>
         <!--
@@ -298,6 +300,7 @@ if (!$_SESSION["logged_in"]) {
     <script src="js/camera.js"></script>
     <script src="js/just-do-it.js"></script>
     <script src="js/statistics.js"></script>
+    <script src="js/ui.js"></script>
     
     <!-- Last one!! -->
     <script src="js/init.js"></script>  

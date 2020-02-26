@@ -1,9 +1,14 @@
 function xhr_add_node(responseText, status) {
-    var ans = JSON.parse(responseText);
-    console.log(responseText);
-    if (parseInt(ans.status) == 0) {
-      var id = ans.par.id
-
+  var ans = JSON.parse(responseText);
+  console.log(responseText);
+  if (parseInt(ans.status) == 0) {
+    var id = ans.par.id
+    var sex = ans.par.sex;
+    var name = ans.par.name;
+    var year = ans.par.year;
+    var x = ans.par.x;
+    var y = ans.par.y;
+    
     var ncolor = null;
     if(sex =="F") ncolor = "#d61c08";
     else if(sex == "M") ncolor = "#0159aa";

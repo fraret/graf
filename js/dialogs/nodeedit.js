@@ -13,7 +13,7 @@ var editDialog = {
     document.querySelector("#edit-dialog").style.display = "none";
   },
   openEdit: function() {
-    lastNode = document.getElementById("node-id").innerText.substr(1);
+    lastNode = openedNode;
     var id = lastNode;
     dialog.close();
     document.getElementById("input-name").parentElement.MaterialTextfield.change(graf.nodes[id].name);
@@ -55,7 +55,6 @@ var editDialog = {
 }
 
 function initEditDialog() {
-  document.querySelector("#editnode-button").addEventListener("click",editDialog.openEdit);
   document.querySelector("#canceledit-button").addEventListener("click",editDialog.close);
   document.querySelector("#saveedit-button").addEventListener("click",editDialog.save);
   document.querySelector("#movenode-button").addEventListener("click",startMove);

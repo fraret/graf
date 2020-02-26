@@ -1,7 +1,11 @@
 function xhr_edit_node(responseText, status) {
-    var ans = JSON.parse(responseText);
-    console.log(responseText);
-    if (parseInt(ans.status) == 0) {
+  var ans = JSON.parse(responseText);
+  console.log(responseText);
+  if (parseInt(ans.status) == 0) {
+    var sex = ans.par.sex;
+    var id = ans.par.id;
+    var name = ans.par.name;
+    var year = ans.par.year;
     var ncolor = null;
     if(sex =="F") ncolor = "#d61c08";
     else if(sex == "M") ncolor = "#0159aa";

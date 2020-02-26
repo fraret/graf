@@ -1,4 +1,20 @@
 /* ********** HERE STARTS option-buttons.css ****** */
+#accept {
+    position: absolute;
+	right: 10px;
+	bottom: 260px;
+	z-index: 100;
+    display: none;
+}
+
+#add {
+    position: absolute;
+	right: 10px;
+	bottom: 210px;
+	z-index: 100;
+    display: none;
+}
+
 #cancel {
     position: absolute;
 	right: 10px;

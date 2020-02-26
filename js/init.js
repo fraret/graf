@@ -1,4 +1,5 @@
 // *********** HERE STARTS init.js *************
+var API_URL = "ns/inserter.php";
 
 function init_pre() {
   initGraf();
@@ -10,8 +11,11 @@ function init_post() {
   initDialog();
   initEditDialog();
   initCamera();
+  initUI();
+  initButtons();
   initSearchBar();
   initStats();
+  modeShow();
 }
 
 window.addEventListener("load", init_pre);

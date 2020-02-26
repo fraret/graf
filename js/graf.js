@@ -113,7 +113,6 @@ function xhr_getgraf(responseText, status) {
     switch (mode) {
       case Modes.SEARCH:
       statsDialog.close();
-      console.log(e);
       var nodeId = e.data.node.id;
       colorNode(nodeId);
       s.refresh();
@@ -161,9 +160,6 @@ function initGraf() {
   xhr("GET", "api.php", "action=getgraf", xhr_getgraf);
   
   mode = Modes.SEARCH;
-  document.querySelector("#cancel").addEventListener("click", function() {
-      setModeSearch();
-  });
 }
 
 function setModeAddEdge(){

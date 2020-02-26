@@ -50,3 +50,7 @@ function addEdge(x, y) {
   setModeSearch();
   
 }
+
+function cancelAddEdge() {
+  setModeSearch();   
+}
