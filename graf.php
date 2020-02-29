@@ -108,7 +108,8 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
         </div>
         
         <div id="addedge-box">
-          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">add</i> Aresta</button>
+          <button id="addedge-button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"><i class="material-icons">add</i></button>
+          <button id="deleteedge-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color--red"><i class="material-icons">remove</i></button>
         </div>
     
       </div>
@@ -159,6 +160,7 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
         <label class="mdl-selectfield__label" for="input-sex" style="color: #007bff;">Sexe</label>
       </div>
       
+      
       <div id="addnode-cancel">
           <div class="mdl-layout-spacer"></div>
           <button id="canceledit-button" class="mdl-button mdl-js-button mdl-button--primary"><i class="material-icons" style="color: rgb(108, 117, 125);">cancel</i></button>
@@ -171,6 +173,29 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
       
     </div>
 
+    
+    
+    <div id="delete-dialog" class="mdl-shadow--2dp" style="display: none;">
+      <h2 id="delete-title" data-fill="edit-title"> Esborra aresta </h2>
+      <br>
+      <div id = "edge-div" class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+        <select class="mdl-selectfield__select" id="input-edge" name="input-edge">
+            <option value="Potato"> i </option>
+            <option value="Potato2"> i2 </option>
+        </select>
+        <label class="mdl-selectfield__label" for="edge" style="color: #007bff;">Aresta</label>
+      </div>
+      
+      <div id="deleteedge-cancel">
+          <div class="mdl-layout-spacer"></div>
+          <button id="canceledge-button" class="mdl-button mdl-js-button mdl-button--primary"><i class="material-icons" style="color: rgb(108, 117, 125);">cancel</i></button>
+      </div>
+      
+      <div id="deleteedge-save">
+          <div class="mdl-layout-spacer"></div>
+          <button id="savedelete-button" class="mdl-button mdl-js-button mdl-button--raised mdl-color--red"><i class="material-icons">delete</i></button>
+      </div>
+    </div>
     <!-- Stats dialog container -->
     <div id="stats-dialog" class="mdl-shadow--2dp" style="display: none;">
       <button id="stats-quit-dialog" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"><i class="material-icons">close</i></button>
@@ -290,6 +315,7 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
     <!-- dialogs-->
     <script src="js/dialogs/nodeinfo.js"></script>
     <script src="js/dialogs/nodeedit.js"></script>
+    <script src="js/dialogs/edgedelete.js"></script>
     
     
     <script src="js/circle-mode.js"></script>

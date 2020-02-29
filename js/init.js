@@ -8,8 +8,6 @@ function init_pre() {
 }
 
 function init_post() {
-  initDialog();
-  initEditDialog();
   initCamera();
   initUI();
   initButtons();

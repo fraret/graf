@@ -34,12 +34,24 @@
   user-select: auto;
 }
 
+#delete-dialog {
+  padding-left: 24px;
+  padding-top: 16px;
+  user-select: auto;
+}
+
 #dialog h2 {
   font-weight: bold;
   font-size: 20px;
 }
 
 #edit-dialog h2 {
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 0px;
+}
+
+#delete-dialog h2 {
   font-weight: normal;
   font-size: 20px;
   line-height: 0px;
@@ -102,6 +114,19 @@
   border-radius: 4px;
 }
 
+#delete-dialog {
+  position: absolute;
+  top: Calc(50% - 185px);
+  left: Calc(50% - 200px);
+  width: 400px;
+  height: 270px;
+  background-color: white;
+  color: black;
+  z-index: 130;
+  overflow-y: visible;
+  border-radius: 4px;
+}
+
 #addnode-save {
   position: absolute;
   bottom: 16px;
@@ -116,12 +141,30 @@
 
 }
 
+#deleteedge-save {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+
+}
+
+#deleteedge-cancel {
+  position: absolute;
+  bottom: 16px;
+  right: 88px;
+
+}
+
 #sex-div {
   width: 60px;
 }
 
 #year-div {
   width: 100px;
+}
+
+#edge-div {
+  width: 300px;
 }
 
 

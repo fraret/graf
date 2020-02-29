@@ -37,16 +37,16 @@ var dialog = {
     this.fill("edges", list, true);
 
     if (window.innerWidth > 700) {
-      document.querySelector("#dialog").style.display = "block";
-      document.querySelector("#backdrop-container").style.display = "block";
+      show("dialog");
+      show("backdrop-container");
     } else {
-      document.querySelector("#summary-dialog").style.display = "block";
+      show("summary-dialog");
     }
   },
   close: function() {
-    document.querySelector("#dialog").style.display = "none";
-    document.querySelector("#summary-dialog").style.display = "none";
-    document.querySelector("#backdrop-container").style.display = "none";
+    hide("dialog");
+    hide("summary-dialog");
+    hide("backdrop-container");
 
     s.graph.nodes().forEach(function(n) {
       n.color = n.originalColor;
@@ -66,15 +66,15 @@ var dialog = {
 
   },
   max: function() {
-    document.querySelector("#summary-dialog").style.display = "none";
-    document.querySelector("#dialog").style.display = "block";
+    hide("summary-dialog");
+    show("dialog");
   },
   min: function() {
-    document.querySelector("#dialog").style.display = "none";
-    document.querySelector("#summary-dialog").style.display = "block";
+    hide("dialog");
+    show("summary-dialog");
   },
   addEdge: function() { 
-    document.querySelector("#edge-list").style.display = "none";
+    hide("edge-list");
     setModeAddEdge();
     dialog.close();
     lastNode = openedNode;
@@ -89,13 +89,5 @@ var dialog = {
 };
 
 
-function initDialog() {
-  document.querySelector("#quit-dialog").addEventListener("click", dialog.close);
-  document.querySelector("#quit2-dialog").addEventListener("click", dialog.close);
-  document.querySelector("#max-dialog").addEventListener("click", dialog.max);
-  document.querySelector("#min-dialog").addEventListener("click", dialog.min);
-  document.querySelector("#editnode-button").addEventListener("click",editDialog.openEdit);
-  document.querySelector("#deletenode-button").addEventListener("click",dialog.deleteNode);
-  
-}
+
 

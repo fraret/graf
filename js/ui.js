@@ -49,7 +49,7 @@ function modeEdit() {
   hide("stats");
   show("add");
   show("editnode-box");
-  show("addedge-button");
+  show("addedge-box");
   
 }
 
@@ -57,7 +57,7 @@ function modeShow() {
   show("stats");
   hide("add");
   hide("editnode-box");
-  hide("addedge-button");
+  hide("addedge-box");
   
 }
 
@@ -71,14 +71,37 @@ function editModeBtnChanged() {
 
 function initButtons() {
   
+  //edit buttons
   document.querySelector("#add").addEventListener("click", editDialog.openAdd);
   document.querySelector("#accept").addEventListener("click", endMove);
   document.querySelector("#cancel").addEventListener("click", cancelBtn);
-  document.querySelector("#edit-toggle").addEventListener("change", editModeBtnChanged);
   
+  //config toggle
+  document.querySelector("#edit-toggle").addEventListener("change", editModeBtnChanged);
+ 
+  //zoom buttons
   if(!is_touch_device()) {
     document.querySelector("#zoomin").addEventListener("click", cameraZoomIn);
     document.querySelector("#zoomout").addEventListener("click", cameraZoomOut);
   }
+  
+  
+  //Buttons in the info dialog 
+  document.querySelector("#quit-dialog").addEventListener("click", dialog.close);
+  document.querySelector("#quit2-dialog").addEventListener("click", dialog.close);
+  document.querySelector("#max-dialog").addEventListener("click", dialog.max);
+  document.querySelector("#min-dialog").addEventListener("click", dialog.min);
+  document.querySelector("#editnode-button").addEventListener("click",editDialog.openEdit);
+  document.querySelector("#deletenode-button").addEventListener("click",dialog.deleteNode);
+  document.querySelector("#deleteedge-button").addEventListener("click", deleteDialog.open);
+  
+  //Buttons in the edit/add dialog
+  document.querySelector("#canceledit-button").addEventListener("click",editDialog.close);
+  document.querySelector("#saveedit-button").addEventListener("click",editDialog.save);
+  document.querySelector("#movenode-button").addEventListener("click",startMove);
+  
+  //Buttons in the delete edge dialog
+  document.querySelector("#canceledge-button").addEventListener("click",deleteDialog.close);
+  document.querySelector("#savedelete-button").addEventListener("click",deleteDialog.send);
 }
 

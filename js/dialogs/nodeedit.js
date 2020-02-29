@@ -10,7 +10,7 @@ var editDialog = {
     }
   },
   close: function() {
-    document.querySelector("#edit-dialog").style.display = "none";
+    hide("edit-dialog");
   },
   openEdit: function() {
     lastNode = openedNode;
@@ -20,13 +20,13 @@ var editDialog = {
     document.getElementById("input-year").value = graf.nodes[id].year;
     document.getElementById("input-sex").value = graf.nodes[id].sex;
     editDialog.fill("edit-title","Edita");
-    document.querySelector("#edit-dialog").style.display = "block";
+    show("edit-dialog");
     editMode = EditModes.EDIT;
   },
   openAdd: function() {
     dialog.close();
     editDialog.fill("edit-title","Afegeix");
-    document.querySelector("#edit-dialog").style.display = "block";
+    show("edit-dialog");
     editMode = EditModes.ADD;
   },
   save: function() {
@@ -52,11 +52,4 @@ var editDialog = {
     }
     document.getElementById("edit-dialog").style.cursor = "default";
   }
-}
-
-function initEditDialog() {
-  document.querySelector("#canceledit-button").addEventListener("click",editDialog.close);
-  document.querySelector("#saveedit-button").addEventListener("click",editDialog.save);
-  document.querySelector("#movenode-button").addEventListener("click",startMove);
-    
 }
