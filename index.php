@@ -44,7 +44,7 @@
                 <h2 class="mdl-card__title-text">El graf</h2>
               </div>
               <div class="mdl-card__supporting-text">
-                Una versió de només lectura del graf, optimitzada per navegadors móvils i amb una interfície millorada.
+                El graf, ara editable des de qualsevol dispositiu.
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a href="graf.php" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">

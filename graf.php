@@ -176,7 +176,7 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
     
     
     <div id="delete-dialog" class="mdl-shadow--2dp" style="display: none;">
-      <h2 id="delete-title" data-fill="edit-title"> Esborra aresta </h2>
+      <h2 id="delete-title"> Esborra aresta </h2>
       <br>
       <div id = "edge-div" class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
         <select class="mdl-selectfield__select" id="input-edge" name="input-edge">
