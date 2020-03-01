@@ -48,7 +48,7 @@ function xhr_add_node(responseText, status) {
 }
 
 function ajax_add_node(id,name,year,sex,x,y) {
-    xhr("POST", "ns/inserter.php", "action=add_node&id="+String(id)+"&name="+name+"&year="+String(year)+"&sex="+sex+"&x="+String(x)+"&y="+String(y), xhr_add_node);
+    xhr("POST", API_URL, "action=add_node&id="+String(id)+"&name="+name+"&year="+String(year)+"&sex="+sex+"&x="+String(x)+"&y="+String(y), xhr_add_node);
     
     
 }

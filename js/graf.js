@@ -59,7 +59,9 @@ function xhr_getgraf(responseText, status) {
   // graf is the JSON data
   graf = JSON.parse(responseText);
 
-
+  //support both old JSON format and new json format
+  if (graf.status === 0) graf = graf.data;
+  
   var sizegraf = 0;
   for (var i in graf.nodes) {
     sizegraf++;

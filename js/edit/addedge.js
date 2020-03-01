@@ -12,7 +12,7 @@ function addEdge(x, y) {
     if (!graf.edges[edgeName]) {
       var a = Math.min(x, y);
       var b = Math.max(x, y);
-      xhr("POST", "ns/inserter.php", "action=add_edge&a="+String(a)+"&b="+String(b), function(responseText, status) {
+      xhr("POST", API_URL, "action=add_edge&a="+String(a)+"&b="+String(b), function(responseText, status) {
         var ans = JSON.parse(responseText);
         console.log(responseText);
         if (parseInt(ans.status) == 0) {

@@ -27,5 +27,5 @@ function xhr_edit_node(responseText, status) {
 }
 
 function ajax_edit_node(id,name,year,sex) {
-  xhr("POST", "ns/inserter.php", "action=edit_node&id="+String(id)+"&name="+name+"&year="+String(year)+"&sex="+sex, xhr_edit_node);
+  xhr("POST", API_URL, "action=edit_node&id="+String(id)+"&name="+name+"&year="+String(year)+"&sex="+sex, xhr_edit_node);
 }
