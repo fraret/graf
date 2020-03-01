@@ -14,6 +14,7 @@ if (isset($_SESSION["logged_in"]) and $_SESSION["logged_in"]) {
   }
 } elseif ($_POST["password"] == $conf["password"]) {
   $_SESSION["logged_in"] = true;
+  $_SESSION["last_action_time"] = time();
   header("Location: graf.php");
   exit();
 } elseif (isset($_POST["password"])) {

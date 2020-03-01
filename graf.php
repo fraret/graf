@@ -299,9 +299,10 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
     
     <div id="graf"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.0/sigma.min.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/sigma.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sigma.js/1.2.1/plugins/sigma.layout.forceAtlas2.min.js"></script>
+    <!-- s.startForceAtlas2({scalingRatio: 500,gravity:200,weight:1}) has been found to produce good results-->
+    
     <!-- Our scripts -->
     
     <!-- edit scripts -->
