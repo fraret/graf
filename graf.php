@@ -318,14 +318,12 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
     <script src="js/dialogs/nodeedit.js"></script>
     <script src="js/dialogs/edgedelete.js"></script>
     
-    
-    <script src="js/circle-mode.js"></script>
+
     <script src="js/graf.js"></script>
     <script src="js/autocomplete.js"></script>
     <script src="js/limit-years.js"></script>
     <script src="js/search-bar.js"></script>
     <script src="js/camera.js"></script>
-    <script src="js/just-do-it.js"></script>
     <script src="js/statistics.js"></script>
     <script src="js/ui.js"></script>
     

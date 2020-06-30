@@ -1,32 +1,25 @@
 var moveUpdater = null;
 var moving = false;
 
-function updateMove() {
-  var x = Math.round(s.camera.x);
-  var y = Math.round(s.camera.y);
-  
+function setNodePos(x,y) {
   s.graph.nodes(lastNode)["x"] = x;
   s.graph.nodes(lastNode)["originalX"] = x;
   s.graph.nodes(lastNode)["read_cam0:x"] = x;
-  
+
   s.graph.nodes(lastNode)["y"] = y;
   s.graph.nodes(lastNode)["originalY"] = y;
   s.graph.nodes(lastNode)["read_cam0:y"] = y;
+}
+
+function updateMove() {
+  setNodePos(Math.round(s.camera.x),Math.round(s.camera.y));
   
   s.refresh();
 }
 
 function resetNodePosition(id) {
-  var x = graf.nodes[id].x;
-  y = graf.nodes[id].y;
-  s.graph.nodes(lastNode)["x"] = x;
-  s.graph.nodes(lastNode)["originalX"] = x;
-  s.graph.nodes(lastNode)["read_cam0:x"] = x;
-  
-  s.graph.nodes(lastNode)["y"] = y;
-  s.graph.nodes(lastNode)["originalY"] = y;
-  s.graph.nodes(lastNode)["read_cam0:y"] = y;
-  
+  setNodePos(graf.nodes[id].x, graf.nodes[id].y);
+
   s.refresh();
 }
 
@@ -34,25 +27,24 @@ function startMove() {
   dialog.close();
   editDialog.close();
   lastNode = openedNode;
-  var id = lastNode;
   moveUpdater = setInterval(updateMove, 500);
   moving = true;
   showMoveBtns();
 }
 
 function xhr_move_node(responseText, status) {
-  var ans = JSON.parse(responseText);
+  let ans = JSON.parse(responseText);
   console.log(responseText);
   
   if (parseInt(ans.status) == 0) {
-    var id = ans.par.id;
-    var x = ans.par.id;
-    var y = ans.par.id;
+    let id = ans.par.id,
+        x = ans.par.id,
+        y = ans.par.id;
     
     graf.nodes[id].x = x;
     graf.nodes[id].y = y;
-    var not = document.querySelector('.mdl-js-snackbar');
-    not.MaterialSnackbar.showSnackbar({ message: 'Node desplaçat!' });
+    let noter = document.querySelector('.mdl-js-snackbar'); //originally called not, could cause confusion
+    noter.MaterialSnackbar.showSnackbar({ message: 'Node desplaçat!' });
   } else {
     alert(ans.msg);
     
@@ -88,8 +80,8 @@ function cancelMove() {
 }
 
 function endMove2() {
-  var x = Math.round(s.camera.x);
-  var y = Math.round(s.camera.y);
+  let x = Math.round(s.camera.x),
+      y = Math.round(s.camera.y);
   
   updateMove();
   

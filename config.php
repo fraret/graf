@@ -1,3 +1,3 @@
 <?php
-$conf = parse_ini_file("../config/config.ini");
+$conf = parse_ini_file("config.ini");
 ?>

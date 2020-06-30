@@ -29,7 +29,7 @@ function addEdge(x, y) {
             vots: 1
           });
           s.refresh();
-          var not = document.querySelector('.mdl-js-snackbar');
+          let not = document.querySelector('.mdl-js-snackbar');
           not.MaterialSnackbar.showSnackbar({ message: 'Aresta afegida!' });
         } else {
           alert(ans.msg);

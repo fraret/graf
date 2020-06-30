@@ -7,20 +7,13 @@ var s, graf;
 // Function to query an online resource (AJAX)
 // Later used to GET the JSON for the graph
 function xhr(method, url, params, callback) {
-  var http = new XMLHttpRequest();
-  if (method == "POST") {
-    http.open(method, url, true);
-  } else {
-    if (params != "") {
-      http.open(method, url+"?"+params, true);
-    } else {
-      http.open(method, url, true);
-    }
-  }
+  let http = new XMLHttpRequest();
+  if (method == "POST" || params == "") http.open(method, url, true);
+  else http.open(method, url + "?" + params, true);
+
   http.onload = function() {
-    if(this.status != 200) {
+    if(this.status != 200)
       console.warn("Attention, status code "+this.status+" when loading via xhr url "+url);
-    }
     callback(this.responseText, this.status);
   };
   if (method == "POST") {
@@ -33,7 +26,7 @@ function xhr(method, url, params, callback) {
 
 function colorNode(nodeId) {
     
-    toKeep = s.graph.neighbors(nodeId);
+    let toKeep = s.graph.neighbors(nodeId);
     //(de)Color nodes
     s.graph.nodes().forEach(function(n) {
         if (toKeep[n.id] || n.id == nodeId) {
@@ -56,18 +49,19 @@ function colorNode(nodeId) {
 
 
 function xhr_getgraf(responseText, status) {
-  // graf is the JSON data
+  let i;
+// graf is the JSON data
   graf = JSON.parse(responseText);
 
   //support both old JSON format and new json format
   if (graf.status === 0) graf = graf.data;
   
   var sizegraf = 0;
-  for (var i in graf.nodes) {
+  for (i in graf.nodes) {
     sizegraf++;
   }
   var nnode = 0;
-  for (var i in graf.nodes) {
+  for (i in graf.nodes) {
     var ncolor = null;
 
 
@@ -82,7 +76,7 @@ function xhr_getgraf(responseText, status) {
 
     s.graph.addNode({
       // we add color, originalColor, size, originalX..Y, circleX..Y atributes
-      id: graf.nodes[i].id,
+      id: graf.nodes[i].key,
       year: graf.nodes[i].year,
       sex: graf.nodes[i].sex,
       label: graf.nodes[i].name,
@@ -99,7 +93,7 @@ function xhr_getgraf(responseText, status) {
 
   }
 
-  for (var i in graf.edges) {
+  for (i in graf.edges) {
 
     s.graph.addEdge({
       id: i,
@@ -112,20 +106,21 @@ function xhr_getgraf(responseText, status) {
   }
   
   s.bind('clickNode', function(e) {
+    let nodeId;
     switch (mode) {
       case Modes.SEARCH:
-      statsDialog.close();
-      var nodeId = e.data.node.id;
-      colorNode(nodeId);
-      s.refresh();
-      dialog.show(nodeId);
-      break;
+        statsDialog.close();
+        nodeId = e.data.node.id;
+        colorNode(nodeId);
+        s.refresh();
+        dialog.show(nodeId);
+        break;
       case Modes.ADD_EDGE:
-      var nodeId = e.data.node.id;
-      addEdge(lastNode, nodeId);
-      colorNode(nodeId);
-      s.refresh();
-      dialog.show(nodeId);
+        nodeId = e.data.node.id;
+        addEdge(lastNode, nodeId);
+        colorNode(nodeId);
+        s.refresh();
+        dialog.show(nodeId);
     }
   });
   
@@ -185,9 +180,9 @@ function setModeSearch(){
 function updateSigma() {
   // returns set of neighouts
   sigma.classes.graph.addMethod("neighbors", function(nodeId) {
-    var k,
-    neighbors = {},
-    index = this.allNeighborsIndex[nodeId] || [];
+    let k,
+        neighbors = {},
+        index = this.allNeighborsIndex[nodeId] || [];
 
     for (k in index) {
       neighbors[k] = this.nodesIndex[k];
@@ -198,9 +193,9 @@ function updateSigma() {
 
   // returns number of neighbours from a set of years
   sigma.classes.graph.addMethod("numNeighborsFromYears", function(nodeId, showYearsCopy) {
-    var k,
-    neighbors = 0,
-    index = this.allNeighborsIndex[nodeId] || [];
+    let k,
+        neighbors = 0,
+        index = this.allNeighborsIndex[nodeId] || [];
 
     for (k in index) {
       if(this.nodesIndex){

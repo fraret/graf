@@ -1,5 +1,5 @@
 // *********** HERE STARTS init.js *************
-var API_URL = "ns/inserter.php";
+const API_URL = "ns/inserter.php";
 
 function init_pre() {
   initGraf();

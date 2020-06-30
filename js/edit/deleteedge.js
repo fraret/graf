@@ -1,8 +1,8 @@
 function xhr_delete_edge(responseText, status) {
-  var ans = JSON.parse(responseText);
+  let ans = JSON.parse(responseText);
   console.log(responseText);
   if (parseInt(ans.status) == 0) {
-    var id = String(ans.par.a)+"_"+String(ans.par.b);
+    let id = String(ans.par.a)+"_"+String(ans.par.b);
     
     delete graf.edges[id];
     s.graph.dropEdge(id);
@@ -17,11 +17,9 @@ function xhr_delete_edge(responseText, status) {
 }
  
 function ajax_delete_edge(id) {
-  var spl = id.split("_");
-  var a = spl[0];
-  var b = spl[1];
+  let [a, b] = id.split("_");
   if(a > b) {
-    var aux = a;
+    let aux = a;
     a = b;
     b = aux;
   }

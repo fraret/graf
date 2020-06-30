@@ -101,20 +101,7 @@
   margin: 0;
 }
 
-#edit-dialog {
-  position: absolute;
-  top: Calc(50% - 185px);
-  left: Calc(50% - 200px);
-  width: 400px;
-  height: 270px;
-  background-color: white;
-  color: black;
-  z-index: 130;
-  overflow-y: visible;
-  border-radius: 4px;
-}
-
-#delete-dialog {
+#edit-dialog, #delete-dialog {
   position: absolute;
   top: Calc(50% - 185px);
   left: Calc(50% - 200px);
