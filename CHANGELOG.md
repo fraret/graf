@@ -1,0 +1,11 @@
+## 2.0.0
+- Added editing mode
+- Implemented statistics from the JLC fork
+- Added new bugs
+- Deleted circle mode (might reintroduce later)
+- Lots of reorganization of code
+- Lots of new unorganized code
+- New login backend: though you might not notice it at first, you will not be asked for the password when reloading less than 15min (or other value chosen by the admin)
+- Fixed reloading the graf asked to resend info (that is, the graf.php no longer handles password validation via POST)
+- Year selection has been moved to a new config dialog
+- Graf (bookmark) icon is now shown
