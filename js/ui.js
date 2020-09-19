@@ -93,6 +93,7 @@ function initButtons() {
   document.querySelector("#min-dialog").addEventListener("click", dialog.min);
   document.querySelector("#editnode-button").addEventListener("click",editDialog.openEdit);
   document.querySelector("#deletenode-button").addEventListener("click",dialog.deleteNode);
+  document.querySelector("#addedge-button").addEventListener("click", dialog.addEdge);
   document.querySelector("#deleteedge-button").addEventListener("click", deleteDialog.open);
   
   //Buttons in the edit/add dialog
