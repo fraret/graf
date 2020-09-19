@@ -76,7 +76,7 @@ function xhr_getgraf(responseText, status) {
 
     s.graph.addNode({
       // we add color, originalColor, size, originalX..Y, circleX..Y atributes
-      id: graf.nodes[i].key,
+      id: graf.nodes[i].id,
       year: graf.nodes[i].year,
       sex: graf.nodes[i].sex,
       label: graf.nodes[i].name,
