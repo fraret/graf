@@ -154,7 +154,7 @@ function initGraf() {
 
 
   // query for JSON for graph data
-  xhr("GET", "api.php", "action=getgraf", xhr_getgraf);
+  xhr("GET", "api/api.php", "action=fetch_json", xhr_getgraf);
   
   mode = Modes.SEARCH;
 }
