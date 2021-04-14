@@ -1,13 +1,13 @@
 // *********** HERE STARTS init.js *************
 const API_URL = "api/api.php";
 
-function init_pre() {
+function initPre() {
   initGraf();
   addYearList();
   initConfig();
 }
 
-function init_post() {
+function initPost() {
   initCamera();
   initUI();
   initButtons();
@@ -16,4 +16,4 @@ function init_post() {
   modeShow();
 }
 
-window.addEventListener("load", init_pre);
+window.addEventListener("load", initPre);

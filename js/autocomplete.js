@@ -63,7 +63,7 @@ function autocomplete(inp, obj) {
             var sourceID = lastNode;
             addEdge(sourceID, n);
             colorNode(sourceID);
-            dialog.show(sourceID,s.graph.neighbors(sourceID));
+            nodeInfoDialog.show(sourceID,s.graph.neighbors(sourceID));
             s.refresh();
             break;
           }

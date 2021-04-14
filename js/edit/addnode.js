@@ -44,7 +44,7 @@ function xhr_add_node(responseText, status) {
   } else {
     alert(ans.msg);
   }
-  editDialog.close();
+  nodeEditDialog.close();
 }
 
 function ajax_add_node(id,name,year,sex,x,y) {

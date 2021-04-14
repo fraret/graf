@@ -24,8 +24,8 @@ function resetNodePosition(id) {
 }
 
 function startMove() {
-  dialog.close();
-  editDialog.close();
+  nodeInfoDialog.close();
+  nodeEditDialog.close();
   lastNode = openedNode;
   moveUpdater = setInterval(updateMove, 500);
   moving = true;

@@ -1,4 +1,4 @@
-var editDialog = {
+var nodeEditDialog = {
   fill: function(data, text, html=false) {
     var el = document.querySelectorAll("*[data-fill=\""+data+"\"]");
     for (var i in el) {
@@ -15,17 +15,17 @@ var editDialog = {
   openEdit: function() {
     lastNode = openedNode;
     var id = lastNode;
-    dialog.close();
+    nodeInfoDialog.close();
     document.getElementById("input-name").parentElement.MaterialTextfield.change(graf.nodes[id].name);
     document.getElementById("input-year").value = graf.nodes[id].year;
     document.getElementById("input-sex").value = graf.nodes[id].sex;
-    editDialog.fill("edit-title","Edita");
+    nodeEditDialog.fill("edit-title","Edita");
     show("edit-dialog");
     editMode = EditModes.EDIT;
   },
   openAdd: function() {
-    dialog.close();
-    editDialog.fill("edit-title","Afegeix");
+    nodeInfoDialog.close();
+    nodeEditDialog.fill("edit-title","Afegeix");
     show("edit-dialog");
     editMode = EditModes.ADD;
   },
@@ -39,7 +39,7 @@ var editDialog = {
       
       ajax_edit_node(id,name,year,sex);
       
-      editDialog.close();
+      nodeEditDialog.close();
     } else {
       var name = document.getElementById("input-name").value;
       var year = document.getElementById("input-year").value;

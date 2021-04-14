@@ -4,7 +4,7 @@ function showMsg(msg) {
 }
 
 function initUI() {
-    if(is_touch_device())  {
+    if(isTouchDevice())  {
     document.querySelector("#zoomin").style.display = "none";
     document.querySelector("#zoomout").style.display = "none";
     document.querySelector("#stats").style.bottom = "110px";
@@ -72,7 +72,7 @@ function editModeBtnChanged() {
 function initButtons() {
   
   //edit buttons
-  document.querySelector("#add").addEventListener("click", editDialog.openAdd);
+  document.querySelector("#add").addEventListener("click", nodeEditDialog.openAdd);
   document.querySelector("#accept").addEventListener("click", endMove);
   document.querySelector("#cancel").addEventListener("click", cancelBtn);
   
@@ -80,29 +80,29 @@ function initButtons() {
   document.querySelector("#edit-toggle").addEventListener("change", editModeBtnChanged);
  
   //zoom buttons
-  if(!is_touch_device()) {
+  if(!isTouchDevice()) {
     document.querySelector("#zoomin").addEventListener("click", cameraZoomIn);
     document.querySelector("#zoomout").addEventListener("click", cameraZoomOut);
   }
   
   
   //Buttons in the info dialog 
-  document.querySelector("#quit-dialog").addEventListener("click", dialog.close);
-  document.querySelector("#quit2-dialog").addEventListener("click", dialog.close);
-  document.querySelector("#max-dialog").addEventListener("click", dialog.max);
-  document.querySelector("#min-dialog").addEventListener("click", dialog.min);
-  document.querySelector("#editnode-button").addEventListener("click",editDialog.openEdit);
-  document.querySelector("#deletenode-button").addEventListener("click",dialog.deleteNode);
-  document.querySelector("#addedge-button").addEventListener("click", dialog.addEdge);
-  document.querySelector("#deleteedge-button").addEventListener("click", deleteDialog.open);
+  document.querySelector("#quit-dialog").addEventListener("click", nodeInfoDialog.close);
+  document.querySelector("#quit2-dialog").addEventListener("click", nodeInfoDialog.close);
+  document.querySelector("#max-dialog").addEventListener("click", nodeInfoDialog.max);
+  document.querySelector("#min-dialog").addEventListener("click", nodeInfoDialog.min);
+  document.querySelector("#editnode-button").addEventListener("click",nodeEditDialog.openEdit);
+  document.querySelector("#deletenode-button").addEventListener("click",nodeInfoDialog.deleteNode);
+  document.querySelector("#addedge-button").addEventListener("click", nodeInfoDialog.addEdge);
+  document.querySelector("#deleteedge-button").addEventListener("click", deleteEdgeDialog.open);
   
   //Buttons in the edit/add dialog
-  document.querySelector("#canceledit-button").addEventListener("click",editDialog.close);
-  document.querySelector("#saveedit-button").addEventListener("click",editDialog.save);
+  document.querySelector("#canceledit-button").addEventListener("click",nodeEditDialog.close);
+  document.querySelector("#saveedit-button").addEventListener("click",nodeEditDialog.save);
   document.querySelector("#movenode-button").addEventListener("click",startMove);
   
   //Buttons in the delete edge dialog
-  document.querySelector("#canceledge-button").addEventListener("click",deleteDialog.close);
-  document.querySelector("#savedelete-button").addEventListener("click",deleteDialog.send);
+  document.querySelector("#canceledge-button").addEventListener("click",deleteEdgeDialog.close);
+  document.querySelector("#savedelete-button").addEventListener("click",deleteEdgeDialog.send);
 }
 

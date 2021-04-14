@@ -7,7 +7,7 @@ function cameraGoto(nodeX, nodeY) {
   );
 }
 
-function is_touch_device() {
+function isTouchDevice() {
   var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
   var mq = function(query) {
     return window.matchMedia(query).matches;

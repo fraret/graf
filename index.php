@@ -57,7 +57,8 @@
                 <h2 class="mdl-card__title-text">App de l'Assistent de Google</h2>
               </div>
               <div class="mdl-card__supporting-text">
-                Com a novetat, ara pots navegar el graf amb l'Assistent de Google! Disponible en castellà i en anglés.
+                  Com a novetat, ara pots navegar el graf amb l'Assistent de Google! Disponible en castellà i en anglés. <br>
+                  <b>Atenció: falta un mantenidor de la part de l'assistent, amb el que no es garanteix el seu funcionament</b>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a href="https://assistant.google.com/services/a/uid/000000249b9f19cb" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">

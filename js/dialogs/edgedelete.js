@@ -1,4 +1,4 @@
-function populateDrop(id) {
+function populateDelEdgeDropdown(id) {
   var neighbors = Object.values(s.graph.neighbors(id));
   
   
@@ -13,20 +13,20 @@ function populateDrop(id) {
     
 }
 
-var deleteDialog = {
+var deleteEdgeDialog = {
   open: function() {
     show("delete-dialog");
-    dialog.close();
+    nodeInfoDialog.close();
     hide("stats-dialog");
     hide("config-dialog");
-    populateDrop(openedNode);
+    populateDelEdgeDropdown(openedNode);
   },
   close: function() {
     hide("delete-dialog");
   },
   send: function() {
     var name = document.getElementById("input-edge").value;
-    deleteDialog.close();
+    deleteEdgeDialog.close();
     ajax_delete_edge(name);
   }
 }

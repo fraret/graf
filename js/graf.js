@@ -48,7 +48,7 @@ function colorNode(nodeId) {
 }
 
 
-function xhr_getgraf(responseText, status) {
+function xhrGetgraf(responseText, status) {
   let i;
 // graf is the JSON data
   graf = JSON.parse(responseText);
@@ -113,18 +113,18 @@ function xhr_getgraf(responseText, status) {
         nodeId = e.data.node.id;
         colorNode(nodeId);
         s.refresh();
-        dialog.show(nodeId);
+        nodeInfoDialog.show(nodeId);
         break;
       case Modes.ADD_EDGE:
         nodeId = e.data.node.id;
         addEdge(lastNode, nodeId);
         colorNode(nodeId);
         s.refresh();
-        dialog.show(nodeId);
+        nodeInfoDialog.show(nodeId);
     }
   });
   
-  init_post();
+  initPost();
   
   s.refresh();
   autocomplete(document.querySelector("#search-input"), graf.nodes);
@@ -154,7 +154,7 @@ function initGraf() {
 
 
   // query for JSON for graph data
-  xhr("GET", "api/api.php", "action=fetch_json", xhr_getgraf);
+  xhr("GET", "api/api.php", "action=fetch_json", xhrGetgraf);
   
   mode = Modes.SEARCH;
 }
@@ -178,7 +178,7 @@ function setModeSearch(){
 }
 
 function updateSigma() {
-  // returns set of neighouts
+  // returns set of neighours
   sigma.classes.graph.addMethod("neighbors", function(nodeId) {
     let k,
         neighbors = {},

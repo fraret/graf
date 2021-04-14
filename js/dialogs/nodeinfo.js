@@ -9,7 +9,7 @@ var editMode = EditModes.EDIT;
 
 var openedNode = -2;
 
-var dialog = {
+var nodeInfoDialog = {
   fill: function(data, text, html=false) {
     var el = document.querySelectorAll("*[data-fill=\""+data+"\"]");
     for (var i in el) {
@@ -76,13 +76,13 @@ var dialog = {
   addEdge: function() { 
     hide("edge-list");
     setModeAddEdge();
-    dialog.close();
+    nodeInfoDialog.close();
     lastNode = openedNode;
     // Focus on the addEdge input bar
    document.querySelector("#search-input").focus();
   },
   deleteNode: function() {
-    dialog.close();
+    nodeInfoDialog.close();
     ajax_delete_node(openedNode);
   }
   

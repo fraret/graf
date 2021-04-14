@@ -317,6 +317,7 @@ if (!isset($_SESSION["logged_in"]) or !$_SESSION["logged_in"]) {
     <script src="js/dialogs/nodeinfo.js"></script>
     <script src="js/dialogs/nodeedit.js"></script>
     <script src="js/dialogs/edgedelete.js"></script>
+    <script src="js/dialogs/stats.js"></script>
     
 
     <script src="js/graf.js"></script>

@@ -46,7 +46,7 @@ function addEdge(x, y) {
   document.querySelector(".md-google-search__empty-btn").style.display = "none";
   
   // Return to default view
-  dialog.close();
+  nodeInfoDialog.close();
   setModeSearch();
   
 }
